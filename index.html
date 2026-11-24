@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端工程終極精通 — 教學簡報</title>
+    <style>
+        /* ========== 變數與重設 ========== */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-surface: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #7dd3fc;
+            --danger: #f87171;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --code-bg: #0b1021;
+            --border: #475569;
+            --radius: 12px;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans TC', '微軟正黑體', sans-serif;
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ========== 簡報容器 ========== */
+        #deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(30px);
+            transition: var(--transition);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-surface);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            z-index: 10;
+        }
+
+        .slide.prev {
+            transform: translateX(-30px);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ========== 導覽欄 ========== */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            z-index: 100;
+        }
+
+        .nav-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: 1rem;
+        }
+
+        .progress-container {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 2rem;
+            height: 4px;
+            background: var(--bg-surface);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slide-counter .current {
+            color: var(--accent);
+        }
+
+        /* ========== 封面頁 ========== */
+        .cover {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .cover-badge {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .cover h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cover p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .cover-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .cover-hint {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ========== 單元頁 ========== */
+        .unit-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .slide h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 1.5rem 0 0.75rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 0.75rem;
+        }
+
+        .slide p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .slide ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .slide li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .slide li strong {
+            color: var(--text-primary);
+        }
+
+        /* ========== 卡片佈局 ========== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        .card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--warning);
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        /* ========== 程式碼區塊 ========== */
+        .code-wrapper {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: var(--bg-surface);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .code-body {
+            padding: 1rem;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .code-body pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: normal;
+        }
+
+        /* 語法高亮色彩 */
+        .code-tag { color: #ff79c6; }
+        .code-attr { color: #50fa7b; }
+        .code-str { color: #f1fa8c; }
+        .code-keyword { color: #bd93f9; }
+        .code-func { color: #8be9fd; }
+        .code-comment { color: #6272a4; font-style: italic; }
+        .code-punct { color: #ff79c6; }
+        .code-operator { color: #ff79c6; }
+        .code-entity { color: #ff79c6; }
+
+        /* ========== 對比表格 ========== */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .compare-col {
+            padding: 1.25rem;
+            border-radius: var(--radius);
+        }
+
+        .compare-bad {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+
+        .compare-good {
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .compare-col h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .compare-bad h4 { color: var(--danger); }
+        .compare-good h4 { color: var(--success); }
+
+        .compare-col ul {
+            padding-left: 1.25rem;
+            margin: 0;
+        }
+
+        .compare-col li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        /* ========== 階段表格 ========== */
+        .stage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .stage-table th {
+            text-align: left;
+            color: var(--text-secondary);
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stage-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        .stage-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .stage-table .stage-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* ========== 檢查清單 ========== */
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .checklist li::before {
+            content: '☐';
+            color: var(--accent);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* ========== 總結頁 ========== */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .summary-col h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .summary-col ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .summary-col li {
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .summary-col li::before {
+            content: '▸';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* ========== 知識來源標示 ========== */
+        .source-bar {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .source-bar .source-icon {
+            color: var(--accent);
+        }
+
+        /* ========== 總結頁樣式覆寫 ========== */
+        .slide.summary .source-bar {
+            margin-top: 0;
+            border-top: none;
+            padding-top: 0;
+            justify-content: center;
+        }
+
+        /* ========== 頁腳 ========== */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            z-index: 100;
+        }
+
+        /* ========== 響應式 ========== */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1.5rem;
+            }
+            .nav-bar {
+                padding: 0 1.5rem;
+            }
+            .progress-container {
+                max-width: 300px;
+                margin: 0 1rem;
+            }
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+            .cover h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ========== 隱藏滾動條但保持功能 ========== */
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: var(--bg-surface);
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="deck">
+        <!-- 導覽欄 -->
+        <nav class="nav-bar">
+            <div class="nav-title">Frontend Ultimate Mastery</div>
+            <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="slide-counter"><span class="current" id="currentNum">1</span> / <span id="totalNum">6</span></div>
+        </nav>
+
+        <!-- 第 1 頁：封面 -->
+        <section class="slide active cover" id="slide-1">
+            <div class="cover-badge">前端工程終極精通</div>
+            <h1>從零理解現代 Web 開發核心</h1>
+            <p>一份專為完全不熟悉前端開發的初學者設計的教學簡報。從 HTML 語義化、CSS Box Model/Flexbox 到 JavaScript 非同步與 Event Loop，循序漸進掌握現代前端工程師必備的核心觀念。</p>
+            <div class="cover-stats">
+                <div class="stat">
+                    <div class="stat-value">6 頁</div>
+                    <div class="stat-label">教學投影片</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">3 模組</div>
+                    <div class="stat-label">HTML / CSS / JavaScript</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">18 篇</div>
+                    <div class="stat-label">Wiki 知識卡片來源</div>
+                </div>
+            </div>
+            <div class="cover-hint">
+                <span>👉</span> 使用 ← → 鍵盤切換投影片
+            </div>
+            <div class="source-bar">
+                <span class="source-icon">📚</span> 知識來源：frontend-wiki/ 知識庫（所有卡片皆來自 wiki/ 資料夾）
+            </div>
+        </section>
+
+        <!-- 第 2 頁：第一單元 HTML -->
+        <section class="slide" id="slide-2">
+            <div class="unit-badge">單元 1 · HTML</div>
+            <h2>HTML 骨架與語義化無障礙</h2>
+            <p>建立網頁的「地基」。理解 HTML5 基礎結構、編碼設定與語義化標籤，避免亂碼、Quirks Mode 與 Div Soup。</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>🦴 HTML5 骨架</h4>
+                    <p>每個網頁都應以 <code>&lt;!DOCTYPE html&gt;</code> 開頭，觸發瀏覽器標準模式，避免進入 Quirks Mode 導致佈局崩潰。</p>
+                    <span class="tag">wiki/01-html/html-skeleton-and-encoding.md</span>
+                </div>
+                <div class="card">
+                    <h4>🔤 UTF-8 編碼</h4>
+                    <p>永遠在 <code>&lt;head&gt;</code> 第一行設定 <code>&lt;meta charset="UTF-8"&gt;</code>，防止中文顯示為亂碼 (Mojibake)。</p>
+                    <span class="tag">wiki/01-html/html-skeleton-and-encoding.md</span>
+                </div>
+                <div class="card">
+                    <h4>🏷️ 語義化標籤</h4>
+                    <p>擺脫 Div Soup，使用 <code>&lt;header&gt;</code>、<code>&lt;nav&gt;</code>、<code>&lt;main&gt;</code>、<code>&lt;footer&gt;</code> 等標籤，提升 SEO 與無障礙支援。</p>
+                    <span class="tag">wiki/01-html/html-semantics-and-a11y.md</span>
+                </div>
+                <div class="card">
+                    <h4>♿ 無障礙 (A11y)</h4>
+                    <p>所有圖片加上有意義的 <code>alt</code>，輸入框綁定 <code>&lt;label&gt;</code>，讓螢幕閱讀器與 Google 爬蟲都能正確理解內容。</p>
+                    <span class="tag">wiki/01-html/html-semantics-and-a11y.md</span>
+                </div>
+            </div>
+
+            <div class="compare-grid">
+                <div class="compare-col compare-bad">
+                    <h4>❌ 錯誤做法</h4>
+                    <ul>
+                        <li>缺少 <code>&lt;!DOCTYPE html&gt;</code></li>
+                        <li>中文頁面沒設定 lang</li>
+                        <li>所有區塊都用 <code>&lt;div&gt;</code></li>
+                        <li>圖片沒有 alt 屬性</li>
+                    </ul>
+                </div>
+                <div class="compare-col compare-good">
+                    <h4>✅ 正確做法</h4>
+                    <ul>
+                        <li>第一行寫 <code>&lt;!DOCTYPE html&gt;</code></li>
+                        <li>設定 <code>lang="zh-Hant"</code></li>
+                        <li>使用語義化標籤</li>
+                        <li>所有 img 加上 alt 描述</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">HTML5 語義化範例 · wiki/01-html/html-semantics-and-a11y.md</div>
+                <div class="code-body">
+<pre><span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html lang=</span><span class="code-str">"zh-Hant"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;meta charset=</span><span class="code-str">"UTF-8"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+  <span class="code-tag">&lt;header&gt;</span>
+    <span class="code-tag">&lt;nav&gt;</span>...</span><span class="code-tag">&lt;/nav&gt;</span>
+  <span class="code-tag">&lt;/header&gt;</span>
+  <span class="code-tag">&lt;main&gt;</span>
+    <span class="code-tag">&lt;article&gt;</span>...</span><span class="code-tag">&lt;/article&gt;</span>
+  <span class="code-tag">&lt;/main&gt;</span>
+  <span class="code-tag">&lt;footer&gt;</span>...</span><span class="code-tag">&lt;/footer&gt;</span>
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span></pre>
+                </div>
+            </div>
+
+            <div class="source-bar">
+                <span class="source-icon">📚</span> 知識來源：wiki/01-html/html-skeleton-and-encoding.md、wiki/01-html/html-semantics-and-a11y.md
+            </div>
+        </section>
+
+        <!-- 第 3 頁：第二單元 CSS -->
+        <section class="slide" id="slide-3">
+            <div class="unit-badge">單元 2 · CSS</div>
+            <h2>CSS 佈局與現代避坑指南</h2>
+            <p>掌握盒模型、選擇器特異度、Flexbox 與 Grid，學習如何避免佈局爆掉、z-index 沒效與手機端 100vh 陷阱。</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>📦 Box Model</h4>
+                    <p>盒子由內到外分為 Content、Padding、Border、Margin 四層。務必設定 <code>* { box-sizing: border-box; }</code> 讓寬度計算更直覺。</p>
+                    <span class="tag">wiki/02-css/css-box-model-and-units.md</span>
+                </div>
+                <div class="card">
+                    <h4>🎯 選擇器特異度</h4>
+                    <p>標籤選擇器 1 分、類選擇器 10 分、ID 選擇器 100 分。權重最高的樣式會贏，避免亂用 <code>!important</code>。</p>
+                    <span class="tag">wiki/02-css/css-selectors-and-specificity.md</span>
+                </div>
+                <div class="card">
+                    <h4>🌀 Flexbox</h4>
+                    <p>用 <code>display: flex</code> 搭配 <code>justify-content</code> 與 <code>align-items</code> 實現完美對齊，<code>gap</code> 統一管理子元素間距。</p>
+                    <span class="tag">wiki/02-css/css-flexbox-layout.md</span>
+                </div>
+                <div class="card">
+                    <h4>📐 CSS Grid</h4>
+                    <p>二維佈局的指揮官。用 <code>repeat(auto-fill, minmax(250px, 1fr))</code> 實現無需 Media Query 的自適應作品集牆。</p>
+                    <span class="tag">wiki/02-css/css-grid-layout.md</span>
+                </div>
+            </div>
+
+            <div class="compare-grid">
+                <div class="compare-col compare-bad">
+                    <h4>❌ 常見陷阱</h4>
+                    <ul>
+                        <li>手機端用 100vh → 地址欄遮擋</li>
+                        <li>全站字體只用 px → 無法縮放</li>
+                        <li>z-index 沒效 → 缺 position 設定</li>
+                        <li>佈局寬度固定 1200px → 出現滾動條</li>
+                    </ul>
+                </div>
+                <div class="compare-col compare-good">
+                    <h4>✅ 專業做法</h4>
+                    <ul>
+                        <li>改用 100dvh 動態視口高度</li>
+                        <li>基礎字體用 rem 支援 A11y</li>
+                        <li>確認元素有 position 設定</li>
+                        <li>用 width: 90% + max-width 流體寬度</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">Flexbox 居中配方 · wiki/02-css/css-flexbox-layout.md</div>
+                <div class="code-body">
+<pre><span class="code-keyword">.center-box</span> <span class="code-punct">{</span>
+    <span class="code-keyword">display</span>: <span class="code-func">flex</span>;
+    <span class="code-keyword">justify-content</span>: <span class="code-keyword">center</span>;
+    <span class="code-keyword">align-items</span>: <span class="code-keyword">center</span>;
+    <span class="code-keyword">height</span>: <span class="code-str">100dvh</span>;
+<span class="code-punct">}</span></pre>
+                </div>
+            </div>
+
+            <div class="source-bar">
+                <span class="source-icon">📚</span> 知識來源：wiki/02-css/css-box-model-and-units.md、wiki/02-css/css-selectors-and-specificity.md、wiki/02-css/css-flexbox-layout.md、wiki/00-mocs/moc-frontend-pitfalls.md
+            </div>
+        </section>
+
+        <!-- 第 4 頁：第三單元 JavaScript -->
+        <section class="slide" id="slide-4">
+            <div class="unit-badge">單元 3 · JavaScript</div>
+            <h2>JavaScript 核心與 Event Loop 運作機制</h2>
+            <p>從變數、函數、DOM 操作到非同步與事件循環，理解 JS 如何在單執行緒下處理異步操作而不卡死瀏覽器。</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>📦 變數與型別</h4>
+                    <p>優先使用 <code>const</code>，只有會改變的數據才用 <code>let</code>。掌握 String、Number、Boolean 與 Null/Undefined。</p>
+                    <span class="tag">wiki/04-js/js-basics-and-variables.md</span>
+                </div>
+                <div class="card">
+                    <h4>⚡ 函數與閉包</h4>
+                    <p>箭頭函數是現代標準。閉包讓函數能記住創建時的環境，常用於建立私有計數器。</p>
+                    <span class="tag">wiki/04-js/js-functions-scope-and-closures.md</span>
+                </div>
+                <div class="card">
+                    <h4>🖱️ DOM 操作</h4>
+                    <p>用 <code>querySelector</code> 選中元素、<code>addEventListener</code> 監聽事件、<code>classList.toggle</code> 實作深色模式。</p>
+                    <span class="tag">wiki/04-js/js-dom-manipulation.md</span>
+                </div>
+                <div class="card">
+                    <h4>🔄 陣列高階函數</h4>
+                    <p><code>.filter()</code> 篩選、<code>.map()</code> 轉換、<code>.forEach()</code> 執行動作，取代冗長的 for 迴圈。</p>
+                    <span class="tag">wiki/04-js/js-arrays-objects-and-hof.md</span>
+                </div>
+            </div>
+
+            <h3>🌀 Event Loop：微任務 vs 宏任務</h3>
+            <p>JS 是單執行緒。Event Loop 不斷檢查 Call Stack，若為空則從 Task Queue 拿取任務。<strong>微任務 (Promise) 優先於 宏任務 (setTimeout)</strong>。</p>
+
+            <div class="code-wrapper">
+                <div class="code-header">Event Loop 執行順序驗證 · wiki/04-js/js-engine-and-event-loop.md</div>
+                <div class="code-body">
+<pre><span class="code-keyword">console.log</span>(<span class="code-str">"1. 開始"</span>);
+
+<span class="code-keyword">setTimeout</span>(<span class="code-funct">()</span> =&gt; <span class="code-keyword">console.log</span>(<span class="code-str">"2. setTimeout (宏任務)"</span>), <span class="code-num">0</span>);
+
+<span class="code-keyword">Promise.resolve</span>().<span class="code-keyword">then</span>(<span class="code-funct">()</span> =&gt; <span class="code-keyword">console.log</span>(<span class="code-str">"3. Promise (微任務)"</span>));
+
+<span class="code-keyword">console.log</span>(<span class="code-str">"4. 結束"</span>);
+
+<span class="code-comment">// 輸出結果：1 → 4 → 3 → 2</span></pre>
+                </div>
+            </div>
+
+            <div class="compare-grid">
+                <div class="compare-col compare-bad">
+                    <h4>❌ 錯誤做法</h4>
+                    <ul>
+                        <li>主執行緒做大量計算 → 瀏覽器卡死</li>
+                        <li>以為 setTimeout(0) 立即執行</li>
+                        <li>fetch 失敗沒有 try/catch 處理</li>
+                        <li>數據加載中頁面空白</li>
+                    </ul>
+                </div>
+                <div class="compare-col compare-good">
+                    <h4>✅ 正確做法</h4>
+                    <ul>
+                        <li>用 setTimeout(...,0) 或 Web Workers 拆分任務</li>
+                        <li>理解微任務優先於宏任務</li>
+                        <li>用 try/catch 捕捉錯誤，顯示友善訊息</li>
+                        <li>顯示「加載中...」Loading 狀態</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="source-bar">
+                <span class="source-icon">📚</span> 知識來源：wiki/04-js/js-basics-and-variables.md、wiki/04-js/js-functions-scope-and-closures.md、wiki/04-js/js-dom-manipulation.md、wiki/04-js/js-async-and-promises.md、wiki/04-js/js-engine-and-event-loop.md
+            </div>
+        </section>
+
+        <!-- 第 5 頁：第四單元 實戰藍圖 -->
+        <section class="slide" id="slide-5">
+            <div class="unit-badge">單元 4 · 實戰</div>
+            <h2>個人品牌網站實戰藍圖與驗收</h2>
+            <p>將 18 篇 Wiki 卡片的觀念彙整為一個完整的個人品牌網站，從 HTML 骨架到異步數據載入，共 16 個實作階段。</p>
+
+            <div class="stage-table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">階段</th>
+                        <th style="width: 48%;">核心任務</th>
+                        <th style="width: 30%;">驗收標準</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="stage-badge">1</span> HTML 骨架</td>
+                        <td>建立 index.html，設定 UTF-8 與 lang="zh-Hant"</td>
+                        <td>中文無亂碼，語言標籤正確</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stage-badge">5</span> 語義化重構</td>
+                        <td>將 &lt;div&gt; 替換為 &lt;header&gt;、&lt;main&gt;、&lt;footer&gt; 等</td>
+                        <td>只有一個 &lt;h1&gt;，通過無障礙檢查</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stage-badge">7</span> Flexbox 佈局</td>
+                        <td>導航欄 justify-content: space-between，Hero 絕對居中</td>
+                        <td>導航欄兩端對齊，Hero 在螢幕正中央</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stage-badge">14</span> 陣列篩選</td>
+                        <td>建立 projects 陣列，實作分類按鈕與 .map() 動態渲染</td>
+                        <td>點擊分類正確篩選，作品由 JS 動態生成</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stage-badge">15</span> 異步載入</td>
+                        <td>async/await 抓取 API 數據，顯示 Loading 與錯誤處理</td>
+                        <td>載入時顯示 Loading，失敗顯示錯誤訊息</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stage-badge">16</span> 效能優化</td>
+                        <td>非緊急 &lt;script&gt; 加上 defer，拆分繁重計算</td>
+                        <td>HTML 先渲染，頁面無卡死</td>
+                    </tr>
+                </tbody>
+            </div>
+
+            <div class="checklist">
+                <li>HTML 通過 W3C 驗證，無語法錯誤</li>
+                <li>CSS Specificity 合理，未濫用 !important</li>
+                <li>JS 無全域變數污染，使用 const/let 而非 var</li>
+                <li>所有圖片皆有有意義的 alt 屬性 (A11y)</li>
+                <li>行動裝置檢視正常，無橫向捲軸 (RWD)</li>
+                <li>深色模式切換正常運作 (DOM 操作)</li>
+                <li>API 載入顯示 Loading，失敗有錯誤訊息</li>
+                <li>頁面首次渲染無白屏，&lt;script&gt; 加上 defer</li>
+            </div>
+
+            <div class="source-bar">
+                <span class="source-icon">📚</span> 知識來源：wiki/projects/project-blueprint.md（彙整自 18 篇 Wiki 卡片）
+            </div>
+        </section>
+
+        <!-- 第 6 頁：總結 -->
+        <section class="slide summary" id="slide-6">
+            <div class="unit-badge">總結</div>
+            <h2>學習地圖回顧與下一步</h2>
+            <p>恭喜！你已經走過前端工程的核心觀念。以下是完整的學習路徑與建議的後續方向。</p>
+
+            <div class="summary-grid">
+                <div class="summary-col">
+                    <h4>🦴 HTML 已掌握</h4>
+                    <ul>
+                        <li>HTML5 骨架與 UTF-8 編碼</li>
+                        <li>語義化標籤與無障礙 (A11y)</li>
+                        <li>表單、多媒體與表格</li>
+                    </ul>
+                </div>
+                <div class="summary-col">
+                    <h4>🎨 CSS 已掌握</h4>
+                    <ul>
+                        <li>選擇器特異度與 Box Model</li>
+                        <li>Flexbox 與 Grid 二維佈局</li>
+                        <li>響應式設計與 Mobile-First</li>
+                    </ul>
+                </div>
+                <div class="summary-col">
+                    <h4>⚡ JavaScript 已掌握</h4>
+                    <ul>
+                        <li>變數、函數與閉包</li>
+                        <li>DOM 操作與事件監聽</li>
+                        <li>異步 Promise 與 Event Loop</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="compare-grid" style="margin-top: 2rem;">
+                <div class="compare-col compare-good">
+                    <h4>🎯 下一步建議</h4>
+                    <ul>
+                        <li>實作個人品牌網站（參照 project-blueprint.md）</li>
+                        <li>學習 TypeScript 與現代框架 (React/Vue/Svelte)</li>
+                        <li>探索 Build Tools (Vite, Webpack) 與 CI/CD</li>
+                        <li>深入效能優化 (Core Web Vitals)</li>
+                    </ul>
+                </div>
+                <div class="compare-col compare-bad">
+                    <h4>⚠️ 繼續避坑</h4>
+                    <ul>
+                        <li>不要亂用 !important 掩蓋特異度問題</li>
+                        <li>避免主執行緒阻塞導致頁面卡死</li>
+                        <li>手機端務必使用 100dvh 而非 100vh</li>
+                        <li>所有互動介面都要支援鍵盤導航 (A11y)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="source-bar">
+                <span class="source-icon">📚</span> 所有內容皆來自 frontend-wiki/ 知識庫，詳見 wiki/ 資料夾與 log.md 編譯日誌
+            </div>
+        </section>
+    </div>
+
+    <div class="footer">
+        <span>Frontend Ultimate Mastery · 單頁教學簡報</span>
+        <span style="margin:0 1rem; color:var(--border);">|</span>
+        <span>知识来源：frontend-wiki/</span>
+        <span style="margin:0 1rem; color:var(--border);">|</span>
+        <span>← → 切換投影片</span>
+    </div>
+
+    <script>
+        (function() {
+            const totalSlides = 6;
+            let current = 1;
+
+            const slides = document.querySelectorAll('.slide');
+            const progressBar = document.getElementById('progressBar');
+            const currentNum = document.getElementById('currentNum');
+            const totalNum = document.getElementById('totalNum');
+
+            totalNum.textContent = totalSlides;
+
+            function updateSlide() {
+                // 更新投影片顯示
+                slides.forEach((slide, index) => {
+                    const slideNum = index + 1;
+                    if (slideNum === current) {
+                        slide.classList.remove('prev');
+                        slide.classList.add('active');
+                    } else if (slideNum < current) {
+                        slide.classList.remove('active');
+                        slide.classList.add('prev');
+                    } else {
+                        slide.classList.remove('active', 'prev');
+                    }
+                });
+
+                // 更新進度條
+                const progress = ((current - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = progress + '%';
+
+                // 更新頁碼
+                currentNum.textContent = current;
+            }
+
+            function nextSlide() {
+                if (current < totalSlides) {
+                    current++;
+                    updateSlide();
+                }
+            }
+
+            function prevSlide() {
+                if (current > 1) {
+                    current--;
+                    updateSlide();
+                }
+            }
+
+            // 鍵盤事件
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevSlide();
+                } else if (e.key === 'Home') {
+                    current = 1;
+                    updateSlide();
+                } else if (e.key === 'End') {
+                    current = totalSlides;
+                    updateSlide();
+                }
+            });
+
+            // 觸摸滑動支援（簡易版）
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) nextSlide();
+                    else prevSlide();
+                }
+            }, {passive: true});
+
+            // 初始化
+            updateSlide();
+        })();
+    </script>
+</body>
+</html>
