@@ -3,7 +3,10 @@ id: stub-m3-01
 module: design-systems
 title: M3 設計系統概覽
 status: stub
-tags: ["#Stub", "#DesignSystem", "#M3""]
+tags:
+  - "#Stub"
+  - "#DesignSystem"
+  - "#M3"
 summary: [Stub] 預留目錄，尚未導入 raw 資料。
 last_updated: 2026-11-24
 ---

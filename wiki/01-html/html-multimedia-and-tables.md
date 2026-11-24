@@ -3,13 +3,19 @@ id: 01-04
 module: html
 title: 多媒體與表格
 status: published
-tags: ["#HTML", "#圖片", "#影片", "#音訊", "#表格", "#A11y""]
+tags:
+  - "#HTML"
+  - "#圖片"
+  - "#影片"
+  - "#音訊"
+  - "#表格"
+  - "#A11y"
 summary: 圖片 `alt` 替代文字、音影元素 `<video>`/`<audio>` 與語義化數據表格 `<table>` 的正確用法。
 source: raw/04-multimedia-and-tables.md
 last_updated: 2026-11-24
 related:
-  - [[語義化 HTML]]
-  - [[A11y 無障礙與 SEO]]
+  - "[[語義化 HTML]]"
+  - "[[A11y 無障礙與 SEO]]"
 ---
 
 # 多媒體與表格

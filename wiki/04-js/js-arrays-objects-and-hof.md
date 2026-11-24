@@ -3,14 +3,23 @@ id: 04-05
 module: js
 title: 陣列與物件
 status: published
-tags: ["#JS", "#陣列", "#物件", "#Object", "#Array", "#map", "#filter", "#forEach", "#高階函數""]
+tags:
+  - "#JS"
+  - "#陣列"
+  - "#物件"
+  - "#Object"
+  - "#Array"
+  - "#map"
+  - "#filter"
+  - "#forEach"
+  - "#高階函數"
 summary: 物件與陣列資料結構、.filter()/.map()/.forEach() 三大高階函數，實作作品集篩選器。
 source: raw/05-array-and-object-deep-dive.md
 last_updated: 2026-11-24
 related:
-  - [[DOM 操作]]
-  - [[異步與 Promise]]
-  - [[MOC: 現代前端避坑指南]]
+  - "[[DOM 操作]]"
+  - "[[異步與 Promise]]"
+  - "[[MOC: 現代前端避坑指南]]"
 ---
 
 # 陣列與物件

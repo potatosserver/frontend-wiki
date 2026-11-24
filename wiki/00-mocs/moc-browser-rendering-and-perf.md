@@ -3,7 +3,13 @@ id: moc-03
 module: cross
 title: 瀏覽器渲染與效能優化
 status: published
-tags: ["#MOC", "#Performance", "#渲染", "#EventLoop", "#BoxModel", "#效能""]
+tags:
+  - "#MOC"
+  - "#Performance"
+  - "#渲染"
+  - "#EventLoop"
+  - "#BoxModel"
+  - "#效能"
 summary: 跨 CSS/JS 的瀏覽器渲染原理與效能優化，含盒模型、事件循環、clamp 流體字體與 Mobile-First 策略。
 last_updated: 2026-11-24
 ---

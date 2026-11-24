@@ -3,13 +3,20 @@ id: 04-07
 module: js
 title: 引擎與事件循環
 status: published
-tags: ["#JS", "#EventLoop", "#單執行緒", "#CallStack", "#TaskQueue", "#Microtask", "#Macrotask""]
+tags:
+  - "#JS"
+  - "#EventLoop"
+  - "#單執行緒"
+  - "#CallStack"
+  - "#TaskQueue"
+  - "#Microtask"
+  - "#Macrotask"
 summary: JavaScript 單執行緒本質、Call Stack、Task Queue、Event Loop、微任務與宏任務優先級。
 source: raw/07-engine-and-event-loop.md
 last_updated: 2026-11-24
 related:
-  - [[異步與 Promise]]
-  - [[MOC: 瀏覽器渲染與效能優化]]
+  - "[[異步與 Promise]]"
+  - "[[MOC: 瀏覽器渲染與效能優化]]"
 ---
 
 # 引擎與事件循環

@@ -3,13 +3,19 @@ id: 02-01
 module: css
 title: 選擇器與特異度
 status: published
-tags: ["#CSS", "#選擇器", "#特異度", "#Specificity", "#ID", "#類""]
+tags:
+  - "#CSS"
+  - "#選擇器"
+  - "#特異度"
+  - "#Specificity"
+  - "#ID"
+  - "#類"
 summary: CSS 標籤選擇器、類選擇器、ID 選擇器的用法與權重計算，解決樣式沒生效的問題。
 source: raw/01-intro-and-selectors.md
 last_updated: 2026-11-24
 related:
-  - [[盒模型]]
-  - [[MOC: 現代前端避坑指南]]
+  - "[[盒模型]]"
+  - "[[MOC: 現代前端避坑指南]]"
 ---
 
 # 選擇器與特異度

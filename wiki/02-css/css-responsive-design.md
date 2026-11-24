@@ -3,14 +3,21 @@ id: 02-06
 module: css
 title: 響應式設計
 status: published
-tags: ["#CSS", "#RWD", "#響應式", "#MediaQuery", "#clamp", "#Mobile-First", "#Viewport""]
+tags:
+  - "#CSS"
+  - "#RWD"
+  - "#響應式"
+  - "#MediaQuery"
+  - "#clamp"
+  - "#Mobile-First"
+  - "#Viewport"
 summary: 響應式設計核心：viewport 設定、@media 媒體查詢、clamp/min/max 流體函數、Mobile-First 策略。
 source: raw/06-responsive-design.md
 last_updated: 2026-11-24
 related:
-  - [[CSS Grid 佈局]]
-  - [[Flexbox 佈局]]
-  - [[MOC: 版面佈局與響應式設計]]
+  - "[[CSS Grid 佈局]]"
+  - "[[Flexbox 佈局]]"
+  - "[[MOC: 版面佈局與響應式設計]]"
 ---
 
 # 響應式設計

@@ -3,13 +3,18 @@ id: 01-01
 module: html
 title: 骨架與編碼
 status: published
-tags: ["#HTML", "#骨架", "#編碼", "#UTF-8", "#SEO""]
+tags:
+  - "#HTML"
+  - "#骨架"
+  - "#編碼"
+  - "#UTF-8"
+  - "#SEO"
 summary: HTML5 基礎骨架結構、<!DOCTYPE> 聲明、lang 屬性與 UTF-8 編碼設定，避免亂碼與 Quirks Mode。
 source: raw/01-skeleton-and-encoding.md
 last_updated: 2026-11-24
 related:
-  - [[語義化 HTML]]
-  - [[Viewport 設定]]
+  - "[[語義化 HTML]]"
+  - "[[Viewport 設定]]"
 ---
 
 # 骨架與編碼

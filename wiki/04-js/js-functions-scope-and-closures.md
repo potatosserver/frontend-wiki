@@ -3,14 +3,20 @@ id: 04-03
 module: js
 title: 函數與作用域
 status: published
-tags: ["#JS", "#函數", "#箭頭函數", "#作用域", "#閉包", "#Closure""]
+tags:
+  - "#JS"
+  - "#函數"
+  - "#箭頭函數"
+  - "#作用域"
+  - "#閉包"
+  - "#Closure"
 summary: 函數定義與呼叫、箭頭函數、全域與區域作用域、閉包私有計數器。
 source: raw/03-functions-and-scope.md
 last_updated: 2026-11-24
 related:
-  - [[運算符與控制流程]]
-  - [[DOM 操作]]
-  - [[Event Loop]]
+  - "[[運算符與控制流程]]"
+  - "[[DOM 操作]]"
+  - "[[Event Loop]]"
 ---
 
 # 函數與作用域

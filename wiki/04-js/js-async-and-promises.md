@@ -3,14 +3,21 @@ id: 04-06
 module: js
 title: 異步與 Promise
 status: published
-tags: ["#JS", "#異步", "#Async", "#Await", "#Promise", "#fetch", "#API""]
+tags:
+  - "#JS"
+  - "#異步"
+  - "#Async"
+  - "#Await"
+  - "#Promise"
+  - "#fetch"
+  - "#API"
 summary: async/await 現代異步標準、fetch API 抓取數據、Loading 狀態與錯誤處理。
 source: raw/06-async-and-promises.md
 last_updated: 2026-11-24
 related:
-  - [[陣列與物件]]
-  - [[Event Loop]]
-  - [[MOC: 瀏覽器渲染與效能優化]]
+  - "[[陣列與物件]]"
+  - "[[Event Loop]]"
+  - "[[MOC: 瀏覽器渲染與效能優化]]"
 ---
 
 # 異步與 Promise

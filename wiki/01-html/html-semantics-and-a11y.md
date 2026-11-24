@@ -3,14 +3,19 @@ id: 01-05
 module: html
 title: 語義化 HTML
 status: published
-tags: ["#HTML", "#語義化", "#A11y", "#SEO", "#Landmark""]
+tags:
+  - "#HTML"
+  - "#語義化"
+  - "#A11y"
+  - "#SEO"
+  - "#Landmark"
 summary: 擺脫 Div Soup，使用 `<header>` `<nav>` `<main>` `<article>` `<section>` `<aside>` `<footer>` 等語義化標籤提升 SEO 與無障礙。
 source: raw/05-semantics-and-a11y.md
 last_updated: 2026-11-24
 related:
-  - [[骨架與編碼]]
-  - [[文字與基礎標籤]]
-  - [[A11y 無障礙與 SEO]]
+  - "[[骨架與編碼]]"
+  - "[[文字與基礎標籤]]"
+  - "[[A11y 無障礙與 SEO]]"
 ---
 
 # 語義化 HTML

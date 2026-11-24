@@ -3,7 +3,10 @@ id: stub-dev-01
 module: devtools-api
 title: F12 與 API 概覽
 status: stub
-tags: ["#Stub", "#DevTools", "#API""]
+tags:
+  - "#Stub"
+  - "#DevTools"
+  - "#API"
 summary: [Stub] 預留目錄，尚未導入 raw 資料。
 last_updated: 2026-11-24
 ---

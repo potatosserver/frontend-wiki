@@ -3,13 +3,21 @@ id: 02-02
 module: css
 title: 盒模型與單位
 status: published
-tags: ["#CSS", "#BoxModel", "#單位", "#rem", "#px", "#vh", "#dvh", "#border-box""]
+tags:
+  - "#CSS"
+  - "#BoxModel"
+  - "#單位"
+  - "#rem"
+  - "#px"
+  - "#vh"
+  - "#dvh"
+  - "#border-box"
 summary: CSS 盒模型四層結構、content-box 與 border-box 差異、rem/em/vw/vh/dvh 單位選擇指南。
 source: raw/02-box-model-and-units.md
 last_updated: 2026-11-24
 related:
-  - [[MOC: 瀏覽器渲染與效能優化]]
-  - [[MOC: 版面佈局與響應式設計]]
+  - "[[MOC: 瀏覽器渲染與效能優化]]"
+  - "[[MOC: 版面佈局與響應式設計]]"
 ---
 
 # 盒模型與單位

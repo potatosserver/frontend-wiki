@@ -3,7 +3,11 @@ id: moc-02
 module: cross
 title: 現代前端避坑指南
 status: published
-tags: ["#MOC", "#Pitfalls", "#避坑", "#Cross-Module""]
+tags:
+  - "#MOC"
+  - "#Pitfalls"
+  - "#避坑"
+  - "#Cross-Module"
 summary: 跨 HTML/CSS/JS 的常見錯誤與正確做法對比表，初學者必讀。
 last_updated: 2026-11-24
 ---

@@ -3,13 +3,19 @@ id: 02-04
 module: css
 title: Flexbox 佈局
 status: published
-tags: ["#CSS", "#Flexbox", "#彈性盒子", "#對齊", "#居中", "#gap""]
+tags:
+  - "#CSS"
+  - "#Flexbox"
+  - "#彈性盒子"
+  - "#對齊"
+  - "#居中"
+  - "#gap"
 summary: Flexbox 啟動方式、主軸與交叉軸對齊、justify-content/align-items/flex 屬性，實作完美對齊與自適應伸縮。
 source: raw/04-flexbox-practical.md
 last_updated: 2026-11-24
 related:
-  - [[CSS Grid 佈局]]
-  - [[MOC: 版面佈局與響應式設計]]
+  - "[[CSS Grid 佈局]]"
+  - "[[MOC: 版面佈局與響應式設計]]"
 ---
 
 # Flexbox 佈局

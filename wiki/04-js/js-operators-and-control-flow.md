@@ -3,13 +3,21 @@ id: 04-02
 module: js
 title: 運算符與控制流程
 status: published
-tags: ["#JS", "#運算符", "#if", "#else", "#迴圈", "#for", "#while", "#布林""]
+tags:
+  - "#JS"
+  - "#運算符"
+  - "#if"
+  - "#else"
+  - "#迴圈"
+  - "#for"
+  - "#while"
+  - "#布林"
 summary: JavaScript 算術與比較運算符、if/else 分支、for/while 迴圈，含嚴格相等 `===` 陷阱。
 source: raw/02-operators-and-control-flow.md
 last_updated: 2026-11-24
 related:
-  - [[基礎與變數]]
-  - [[函數與作用域]]
+  - "[[基礎與變數]]"
+  - "[[函數與作用域]]"
 ---
 
 # 運算符與控制流程
