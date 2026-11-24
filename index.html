@@ -1,31 +1,123 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>前端工程終極精通 — 教學簡報</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>前端工程終極精通 — M3 教學簡報</title>
     <style>
-        /* ========== 變數與重設 ========== */
+        /* ========== Material Design 3 (M3) 語義色彩系統 ========== */
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --bg-surface: #334155;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --accent-hover: #7dd3fc;
-            --danger: #f87171;
-            --success: #4ade80;
-            --warning: #fbbf24;
-            --code-bg: #0b1021;
-            --border: #475569;
-            --radius: 12px;
-            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            /* 動態高度基準：優先使用 dvh，並由 JS visualViewport 即時校正 */
+            --app-height: 100vh;
+            --app-height: 100dvh;
+
+            /* M3 Shape Scale */
+            --md-sys-shape-xs: 4px;
+            --md-sys-shape-sm: 8px;
+            --md-sys-shape-md: 12px;
+            --md-sys-shape-lg: 16px;
+            --md-sys-shape-xl: 28px;
+            --md-sys-shape-full: 9999px;
+
+            /* M3 Motion (Emphasized & Standard Easing) */
+            --md-sys-motion-emphasized: cubic-bezier(0.2, 0, 0, 1);
+            --md-sys-motion-standard: cubic-bezier(0.4, 0, 0.2, 1);
+            --md-sys-duration-medium: 350ms;
+
+            /* M3 Dark Theme Tonal Palette (預設深色調性表面) */
+            --md-sys-color-background: #101418;
+            --md-sys-color-surface: #101418;
+            --md-sys-color-surface-container-lowest: #0b0e12;
+            --md-sys-color-surface-container-low: #181c20;
+            --md-sys-color-surface-container: #1c2024;
+            --md-sys-color-surface-container-high: #272a2f;
+            --md-sys-color-surface-container-highest: #31353a;
+
+            --md-sys-color-on-surface: #e1e2e8;
+            --md-sys-color-on-surface-variant: #c2c7cf;
+            --md-sys-color-outline: #8c9199;
+            --md-sys-color-outline-variant: #42474e;
+
+            --md-sys-color-primary: #95ccff;
+            --md-sys-color-on-primary: #003353;
+            --md-sys-color-primary-container: #004a76;
+            --md-sys-color-on-primary-container: #cde5ff;
+
+            --md-sys-color-secondary: #b8c8da;
+            --md-sys-color-secondary-container: #394857;
+            --md-sys-color-on-secondary-container: #d4e4f6;
+
+            --md-sys-color-tertiary: #d1bfe7;
+            --md-sys-color-tertiary-container: #4e4162;
+            --md-sys-color-on-tertiary-container: #eddcff;
+
+            --md-sys-color-error: #ffb4ab;
+            --md-sys-color-error-container: rgba(147, 0, 10, 0.35);
+            --md-sys-color-on-error-container: #ffdad6;
+
+            --md-sys-color-success: #87d996;
+            --md-sys-color-success-container: rgba(0, 83, 35, 0.38);
+            --md-sys-color-on-success-container: #a3f6b0;
+
+            --md-sys-color-warning: #f5bf48;
+            --md-sys-color-warning-container: rgba(91, 67, 0, 0.45);
+            --md-sys-color-on-warning-container: #ffdf9e;
+
+            --md-sys-elevation-1: 0 1px 3px 1px rgba(0, 0, 0, 0.25), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --md-sys-elevation-2: 0 2px 6px 2px rgba(0, 0, 0, 0.25), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+
+            /* 程式碼區塊固定深色對比表面 */
+            --code-surface: #0b0f14;
+            --code-header: #161b22;
+            --code-text: #e6edf3;
         }
 
-        * {
+        /* M3 Light Theme Tonal Palette */
+        :root[data-theme="light"] {
+            --md-sys-color-background: #f7f9ff;
+            --md-sys-color-surface: #f7f9ff;
+            --md-sys-color-surface-container-lowest: #ffffff;
+            --md-sys-color-surface-container-low: #f1f4fa;
+            --md-sys-color-surface-container: #ebeef4;
+            --md-sys-color-surface-container-high: #e5e8ee;
+            --md-sys-color-surface-container-highest: #e0e3e8;
+
+            --md-sys-color-on-surface: #181c20;
+            --md-sys-color-on-surface-variant: #42474e;
+            --md-sys-color-outline: #72777f;
+            --md-sys-color-outline-variant: #c2c7cf;
+
+            --md-sys-color-primary: #00639b;
+            --md-sys-color-on-primary: #ffffff;
+            --md-sys-color-primary-container: #cde5ff;
+            --md-sys-color-on-primary-container: #001d32;
+
+            --md-sys-color-secondary: #51606f;
+            --md-sys-color-secondary-container: #d4e4f6;
+            --md-sys-color-on-secondary-container: #0d1d2a;
+
+            --md-sys-color-tertiary: #66587b;
+            --md-sys-color-tertiary-container: #eddcff;
+            --md-sys-color-on-tertiary-container: #211534;
+
+            --md-sys-color-error: #ba1a1a;
+            --md-sys-color-error-container: #ffdad6;
+            --md-sys-color-on-error-container: #410002;
+
+            --md-sys-color-success: #146c2e;
+            --md-sys-color-success-container: #c4eed0;
+            --md-sys-color-on-success-container: #072711;
+
+            --md-sys-color-warning: #7a5900;
+            --md-sys-color-warning-container: #ffdf9e;
+            --md-sys-color-on-warning-container: #261a00;
+
+            --md-sys-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 3px 1px rgba(0, 0, 0, 0.05);
+            --md-sys-elevation-2: 0 2px 6px 2px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ========== 基礎重設 ========== */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -36,41 +128,180 @@
         }
 
         body {
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans TC', '微軟正黑體', sans-serif;
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-surface);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans TC', '微軟正黑體', sans-serif;
             line-height: 1.6;
+            height: var(--app-height);
+            width: 100%;
             overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+            transition: background-color 250ms var(--md-sys-motion-standard), color 250ms var(--md-sys-motion-standard);
         }
 
-        /* ========== 簡報容器 ========== */
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85em;
+            background-color: var(--md-sys-color-surface-container-highest);
+            color: var(--md-sys-color-primary);
+            padding: 0.15em 0.45em;
+            border-radius: var(--md-sys-shape-xs);
+        }
+
+        /* ========== 動態高度 App Shell（Flex Column 無重疊佈局） ========== */
         #deck {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
             display: flex;
             flex-direction: column;
+            height: var(--app-height);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* ========== M3 Top App Bar ========== */
+        .top-app-bar {
+            flex-shrink: 0;
+            min-height: 64px;
+            background-color: var(--md-sys-color-surface-container);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.6rem clamp(1rem, 3vw, 2.5rem);
+            z-index: 20;
+        }
+
+        .app-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--md-sys-shape-md);
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .nav-title {
+            font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* M3 Linear Progress Indicator */
+        .progress-track {
+            flex: 1;
+            max-width: 480px;
+            height: 6px;
+            background-color: var(--md-sys-color-surface-container-highest);
+            border-radius: var(--md-sys-shape-full);
+            overflow: hidden;
+        }
+
+        .progress-indicator {
+            height: 100%;
+            width: 0%;
+            background-color: var(--md-sys-color-primary);
+            border-radius: var(--md-sys-shape-full);
+            transition: width var(--md-sys-duration-medium) var(--md-sys-motion-emphasized);
+        }
+
+        .app-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .viewport-badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-secondary-container);
+            background-color: var(--md-sys-color-secondary-container);
+            padding: 0.25rem 0.65rem;
+            border-radius: var(--md-sys-shape-full);
+            white-space: nowrap;
+        }
+
+        .md-icon-btn {
+            appearance: none;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--md-sys-color-on-surface);
+            height: 38px;
+            padding: 0 0.85rem;
+            border-radius: var(--md-sys-shape-full);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background-color 180ms var(--md-sys-motion-standard), transform 150ms var(--md-sys-motion-standard);
+        }
+
+        .md-icon-btn:hover {
+            background-color: var(--md-sys-color-surface-container-highest);
+        }
+
+        .md-icon-btn:active {
+            transform: scale(0.96);
+        }
+
+        .md-icon-btn:focus-visible {
+            outline: 2px solid var(--md-sys-color-primary);
+            outline-offset: 2px;
+        }
+
+        .slide-counter {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface-variant);
+            min-width: 3.2rem;
+            text-align: right;
+        }
+
+        .slide-counter .current {
+            color: var(--md-sys-color-primary);
+        }
+
+        /* ========== 動態主舞台 Stage ========== */
+        .stage {
+            flex: 1;
+            min-height: 0; /* 關鍵：讓內部可滾動而不撐破 100dvh */
+            position: relative;
+            overflow: hidden;
         }
 
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            padding: 3rem 4rem;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: clamp(1.25rem, 3vh, 2.5rem) clamp(1rem, 4vw, 3.5rem);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             opacity: 0;
             visibility: hidden;
-            transform: translateX(30px);
-            transition: var(--transition);
-            overflow-y: auto;
+            transform: translateX(32px);
+            transition: opacity var(--md-sys-duration-medium) var(--md-sys-motion-emphasized),
+                        transform var(--md-sys-duration-medium) var(--md-sys-motion-emphasized),
+                        visibility var(--md-sys-duration-medium);
             scrollbar-width: thin;
-            scrollbar-color: var(--accent) var(--bg-surface);
+            scrollbar-color: var(--md-sys-color-outline-variant) transparent;
         }
 
         .slide.active {
@@ -81,908 +312,1014 @@
         }
 
         .slide.prev {
-            transform: translateX(-30px);
             opacity: 0;
             visibility: hidden;
+            transform: translateX(-32px);
         }
 
-        /* ========== 導覽欄 ========== */
-        .nav-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .slide-inner {
             width: 100%;
-            height: 70px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            max-width: 1120px;
+            margin: 0 auto;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 3rem;
-            z-index: 100;
+            flex-direction: column;
+            gap: clamp(0.85rem, 2vh, 1.35rem);
+            min-height: 100%;
         }
 
-        .nav-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 0.5px;
-        }
-
-        .nav-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-left: 1rem;
-        }
-
-        .progress-container {
-            flex: 1;
-            max-width: 600px;
-            margin: 0 2rem;
-            height: 4px;
-            background: var(--bg-surface);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-            width: 0%;
-            transition: width 0.4s ease;
-            border-radius: 2px;
-        }
-
-        .slide-counter {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .slide-counter .current {
-            color: var(--accent);
-        }
-
-        /* ========== 封面頁 ========== */
-        .cover {
+        /* ========== 封面頁 (安全動態居中：不會在矮螢幕裁切頂部) ========== */
+        .slide.cover .slide-inner {
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            margin: auto;
         }
 
-        .cover-badge {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
+        .cover-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1.15rem;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-radius: var(--md-sys-shape-full);
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
         }
 
         .cover h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--md-sys-color-on-surface);
         }
 
-        .cover p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+        .cover h1 span {
+            color: var(--md-sys-color-primary);
+        }
+
+        .cover-desc {
+            font-size: clamp(1rem, 1.8vw, 1.18rem);
+            color: var(--md-sys-color-on-surface-variant);
+            max-width: 660px;
             line-height: 1.7;
         }
 
         .cover-stats {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            width: 100%;
+            max-width: 640px;
         }
 
-        .stat {
-            text-align: center;
+        .stat-card {
+            flex: 1 1 150px;
+            background-color: var(--md-sys-color-surface-container-low);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-xl);
+            padding: 1.15rem 1.25rem;
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 700;
-            color: var(--accent);
+            color: var(--md-sys-color-primary);
+            line-height: 1.2;
         }
 
         .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.82rem;
+            color: var(--md-sys-color-on-surface-variant);
             margin-top: 0.25rem;
         }
 
         .cover-hint {
-            margin-top: 3rem;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--md-sys-color-on-surface-variant);
+            background-color: var(--md-sys-color-surface-container);
+            padding: 0.45rem 1rem;
+            border-radius: var(--md-sys-shape-full);
         }
 
-        /* ========== 單元頁 ========== */
-        .unit-badge {
+        /* ========== M3 內容排版 ========== */
+        .unit-chip {
+            align-self: flex-start;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            color: var(--accent);
+            gap: 0.4rem;
+            padding: 0.35rem 0.9rem;
+            background-color: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+            border-radius: var(--md-sys-shape-sm);
             font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            letter-spacing: 0.4px;
         }
 
         .slide h2 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-size: clamp(1.5rem, 3.2vw, 2.25rem);
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+            line-height: 1.25;
+            color: var(--md-sys-color-on-surface);
         }
 
         .slide h3 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: var(--accent);
-            margin: 1.5rem 0 0.75rem;
-            border-left: 4px solid var(--accent);
-            padding-left: 0.75rem;
+            color: var(--md-sys-color-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
         }
 
-        .slide p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-size: 1rem;
+        .lead-text {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+            max-width: 78ch;
         }
 
-        .slide ul {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        .slide li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .slide li strong {
-            color: var(--text-primary);
-        }
-
-        /* ========== 卡片佈局 ========== */
+        /* ========== M3 Filled & Outlined Cards ========== */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr));
+            gap: 1rem;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            transition: var(--transition);
+        .md-card {
+            background-color: var(--md-sys-color-surface-container-low);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-lg);
+            padding: 1.15rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            transition: background-color 200ms var(--md-sys-motion-standard),
+                        transform 200ms var(--md-sys-motion-emphasized),
+                        box-shadow 200ms var(--md-sys-motion-standard);
         }
 
-        .card:hover {
-            border-color: var(--accent);
+        .md-card:hover {
+            background-color: var(--md-sys-color-surface-container-high);
             transform: translateY(-2px);
+            box-shadow: var(--md-sys-elevation-2);
         }
 
-        .card h4 {
+        .md-card h4 {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
+            color: var(--md-sys-color-primary);
         }
 
-        .card p {
+        .md-card p {
             font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0;
+            color: var(--md-sys-color-on-surface-variant);
+            flex: 1;
         }
 
-        .card .tag {
-            display: inline-block;
-            font-size: 0.7rem;
+        .source-chip {
+            align-self: flex-start;
+            font-size: 0.72rem;
             font-weight: 600;
-            color: var(--warning);
-            background: rgba(251, 191, 36, 0.1);
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            margin-top: 0.5rem;
+            color: var(--md-sys-color-on-warning-container);
+            background-color: var(--md-sys-color-warning-container);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--md-sys-shape-full);
+            word-break: break-all;
         }
 
-        /* ========== 程式碼區塊 ========== */
+        /* ========== M3 語義對比容器 ========== */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 1rem;
+        }
+
+        .compare-card {
+            padding: 1.1rem 1.25rem;
+            border-radius: var(--md-sys-shape-lg);
+        }
+
+        .compare-bad {
+            background-color: var(--md-sys-color-error-container);
+            color: var(--md-sys-color-on-error-container);
+            border: 1px solid rgba(255, 180, 171, 0.25);
+        }
+
+        .compare-good {
+            background-color: var(--md-sys-color-success-container);
+            color: var(--md-sys-color-on-success-container);
+            border: 1px solid rgba(135, 217, 150, 0.25);
+        }
+
+        .compare-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.55rem;
+        }
+
+        .compare-card ul {
+            padding-left: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-size: 0.88rem;
+        }
+
+        /* ========== M3 程式碼容器 + 複製按鈕 ========== */
         .code-wrapper {
-            background: var(--code-bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin: 1rem 0;
+            background-color: var(--code-surface);
+            color: var(--code-text);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-lg);
             overflow: hidden;
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         .code-header {
-            background: var(--bg-surface);
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
+            background-color: var(--code-header);
+            padding: 0.55rem 1rem;
+            font-size: 0.78rem;
+            color: #9da7b3;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .copy-btn {
+            appearance: none;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background-color: rgba(255, 255, 255, 0.06);
+            color: #e6edf3;
+            padding: 0.22rem 0.65rem;
+            border-radius: var(--md-sys-shape-full);
+            font-size: 0.72rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 150ms ease;
+        }
+
+        .copy-btn:hover {
+            background-color: rgba(255, 255, 255, 0.14);
         }
 
         .code-body {
-            padding: 1rem;
-            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
-            font-size: 0.85rem;
-            line-height: 1.5;
+            padding: 1rem 1.15rem;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.84rem;
+            line-height: 1.55;
             overflow-x: auto;
         }
 
         .code-body pre {
             margin: 0;
-            white-space: pre-wrap;
-            word-break: normal;
+            white-space: pre;
         }
 
-        /* 語法高亮色彩 */
-        .code-tag { color: #ff79c6; }
-        .code-attr { color: #50fa7b; }
-        .code-str { color: #f1fa8c; }
-        .code-keyword { color: #bd93f9; }
-        .code-func { color: #8be9fd; }
-        .code-comment { color: #6272a4; font-style: italic; }
-        .code-punct { color: #ff79c6; }
-        .code-operator { color: #ff79c6; }
-        .code-entity { color: #ff79c6; }
+        .code-tag { color: #ff7b72; }
+        .code-attr { color: #79c0ff; }
+        .code-str { color: #a5d6ff; }
+        .code-keyword { color: #d2a8ff; }
+        .code-func { color: #7ee787; }
+        .code-num { color: #ffa657; }
+        .code-comment { color: #8b949e; font-style: italic; }
+        .code-punct { color: #e6edf3; }
 
-        /* ========== 對比表格 ========== */
-        .compare-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem;
+        /* ========== 實戰表格 (修復原版 div 誤用為 table) ========== */
+        .table-surface {
+            background-color: var(--md-sys-color-surface-container-low);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-lg);
+            overflow-x: auto;
         }
 
-        .compare-col {
-            padding: 1.25rem;
-            border-radius: var(--radius);
-        }
-
-        .compare-bad {
-            background: rgba(248, 113, 113, 0.1);
-            border: 1px solid rgba(248, 113, 113, 0.3);
-        }
-
-        .compare-good {
-            background: rgba(74, 222, 128, 0.1);
-            border: 1px solid rgba(74, 222, 128, 0.3);
-        }
-
-        .compare-col h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .compare-bad h4 { color: var(--danger); }
-        .compare-good h4 { color: var(--success); }
-
-        .compare-col ul {
-            padding-left: 1.25rem;
-            margin: 0;
-        }
-
-        .compare-col li {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.4rem;
-        }
-
-        /* ========== 階段表格 ========== */
         .stage-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
+            min-width: 560px;
         }
 
         .stage-table th {
             text-align: left;
-            color: var(--text-secondary);
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--md-sys-color-on-surface);
+            padding: 0.75rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
         }
 
         .stage-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-secondary);
-            vertical-align: top;
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface-variant);
+            vertical-align: middle;
         }
 
-        .stage-table tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
+        .stage-table tbody tr:last-child td {
+            border-bottom: none;
         }
 
-        .stage-table .stage-badge {
-            font-size: 0.7rem;
+        .stage-table tbody tr:hover td {
+            background-color: var(--md-sys-color-surface-container);
+        }
+
+        .stage-badge {
+            display: inline-block;
+            font-size: 0.72rem;
             font-weight: 700;
-            color: var(--accent);
-            background: rgba(56, 189, 248, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            color: var(--md-sys-color-on-primary-container);
+            background-color: var(--md-sys-color-primary-container);
+            padding: 0.18rem 0.55rem;
+            border-radius: var(--md-sys-shape-full);
+            margin-right: 0.4rem;
         }
 
-        /* ========== 檢查清單 ========== */
+        /* ========== 互動式檢查清單 (修復原版 div 誤用為 ul) ========== */
         .checklist {
+            list-style: none;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: 0.65rem;
         }
 
         .checklist li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
+            background-color: var(--md-sys-color-surface-container-low);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-md);
+            padding: 0.6rem 0.85rem;
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: var(--md-sys-color-on-surface-variant);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
         }
 
-        .checklist li::before {
-            content: '☐';
-            color: var(--accent);
-            font-weight: 700;
+        .checklist input[type="checkbox"] {
+            accent-color: var(--md-sys-color-primary);
+            width: 16px;
+            height: 16px;
             flex-shrink: 0;
-            margin-top: 0.1rem;
+            cursor: pointer;
         }
 
-        /* ========== 總結頁 ========== */
+        /* ========== 總結欄 ========== */
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: 1rem;
         }
 
-        .summary-col h4 {
-            color: var(--accent);
+        .summary-card {
+            background-color: var(--md-sys-color-surface-container-low);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-lg);
+            padding: 1.15rem 1.25rem;
+        }
+
+        .summary-card h4 {
+            color: var(--md-sys-color-primary);
             font-size: 1rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        .summary-col ul {
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .summary-col li {
             margin-bottom: 0.75rem;
-            color: var(--text-secondary);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        }
+
+        .summary-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .summary-card li {
             font-size: 0.9rem;
-            padding-left: 1.5rem;
+            color: var(--md-sys-color-on-surface-variant);
+            padding-left: 1.1rem;
             position: relative;
         }
 
-        .summary-col li::before {
+        .summary-card li::before {
             content: '▸';
-            color: var(--accent);
+            color: var(--md-sys-color-primary);
             position: absolute;
             left: 0;
             font-weight: 700;
         }
 
-        /* ========== 知識來源標示 ========== */
+        /* ========== 知識來源列 ========== */
         .source-bar {
             margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            padding-top: 0.85rem;
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            font-size: 0.78rem;
+            color: var(--md-sys-color-on-surface-variant);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        /* ========== M3 Bottom Navigation / Control Dock ========== */
+        .bottom-bar {
+            flex-shrink: 0;
+            min-height: 60px;
+            background-color: var(--md-sys-color-surface-container);
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.5rem clamp(1rem, 3vw, 2.5rem);
+            z-index: 20;
+        }
+
+        .footer-meta {
+            font-size: 0.78rem;
+            color: var(--md-sys-color-on-surface-variant);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .slide-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .dot-btn {
+            width: 10px;
+            height: 10px;
+            border-radius: var(--md-sys-shape-full);
+            border: none;
+            background-color: var(--md-sys-color-outline-variant);
+            cursor: pointer;
+            transition: width 220ms var(--md-sys-motion-emphasized), background-color 220ms ease;
+        }
+
+        .dot-btn[aria-current="true"] {
+            width: 26px;
+            background-color: var(--md-sys-color-primary);
+        }
+
+        .nav-controls {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-shrink: 0;
         }
 
-        .source-bar .source-icon {
-            color: var(--accent);
-        }
-
-        /* ========== 總結頁樣式覆寫 ========== */
-        .slide.summary .source-bar {
-            margin-top: 0;
-            border-top: none;
-            padding-top: 0;
-            justify-content: center;
-        }
-
-        /* ========== 頁腳 ========== */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid var(--border);
-            display: flex;
+        .md-tonal-btn, .md-filled-btn {
+            appearance: none;
+            border: none;
+            height: 38px;
+            padding: 0 1rem;
+            border-radius: var(--md-sys-shape-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            z-index: 100;
+            gap: 0.35rem;
+            transition: opacity 150ms ease, transform 150ms ease, filter 150ms ease;
         }
 
-        /* ========== 響應式 ========== */
+        .md-tonal-btn {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        .md-filled-btn {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .md-tonal-btn:disabled, .md-filled-btn:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
+
+        .md-tonal-btn:not(:disabled):hover,
+        .md-filled-btn:not(:disabled):hover {
+            filter: brightness(1.08);
+        }
+
+        .md-tonal-btn:not(:disabled):active,
+        .md-filled-btn:not(:disabled):active {
+            transform: scale(0.96);
+        }
+
+        /* ========== 動態矮螢幕識別調整 (Dynamic Height Adaptation) ========== */
+        @media (max-height: 700px) {
+            .top-app-bar { min-height: 52px; padding-top: 0.4rem; padding-bottom: 0.4rem; }
+            .bottom-bar { min-height: 50px; padding-top: 0.35rem; padding-bottom: 0.35rem; }
+            .slide { padding-top: 1rem; padding-bottom: 1rem; }
+            .slide-inner { gap: 0.75rem; }
+            .stat-card { padding: 0.8rem 1rem; }
+        }
+
         @media (max-width: 768px) {
-            .slide {
-                padding: 2rem 1.5rem;
+            .progress-track, .footer-meta, .viewport-badge {
+                display: none;
             }
-            .nav-bar {
-                padding: 0 1.5rem;
+            .code-body {
+                font-size: 0.78rem;
             }
-            .progress-container {
-                max-width: 300px;
-                margin: 0 1rem;
-            }
-            .compare-grid {
-                grid-template-columns: 1fr;
-            }
-            .cover h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* ========== 隱藏滾動條但保持功能 ========== */
-        .slide::-webkit-scrollbar {
-            width: 6px;
-        }
-        .slide::-webkit-scrollbar-track {
-            background: var(--bg-surface);
-        }
-        .slide::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 3px;
         }
     </style>
 </head>
 <body>
 
     <div id="deck">
-        <!-- 導覽欄 -->
-        <nav class="nav-bar">
-            <div class="nav-title">Frontend Ultimate Mastery</div>
-            <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-            <div class="slide-counter"><span class="current" id="currentNum">1</span> / <span id="totalNum">6</span></div>
-        </nav>
-
-        <!-- 第 1 頁：封面 -->
-        <section class="slide active cover" id="slide-1">
-            <div class="cover-badge">前端工程終極精通</div>
-            <h1>從零理解現代 Web 開發核心</h1>
-            <p>一份專為完全不熟悉前端開發的初學者設計的教學簡報。從 HTML 語義化、CSS Box Model/Flexbox 到 JavaScript 非同步與 Event Loop，循序漸進掌握現代前端工程師必備的核心觀念。</p>
-            <div class="cover-stats">
-                <div class="stat">
-                    <div class="stat-value">6 頁</div>
-                    <div class="stat-label">教學投影片</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">3 模組</div>
-                    <div class="stat-label">HTML / CSS / JavaScript</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">18 篇</div>
-                    <div class="stat-label">Wiki 知識卡片來源</div>
-                </div>
-            </div>
-            <div class="cover-hint">
-                <span>👉</span> 使用 ← → 鍵盤切換投影片
-            </div>
-            <div class="source-bar">
-                <span class="source-icon">📚</span> 知識來源：frontend-wiki/ 知識庫（所有卡片皆來自 wiki/ 資料夾）
-            </div>
-        </section>
-
-        <!-- 第 2 頁：第一單元 HTML -->
-        <section class="slide" id="slide-2">
-            <div class="unit-badge">單元 1 · HTML</div>
-            <h2>HTML 骨架與語義化無障礙</h2>
-            <p>建立網頁的「地基」。理解 HTML5 基礎結構、編碼設定與語義化標籤，避免亂碼、Quirks Mode 與 Div Soup。</p>
-
-            <div class="cards-grid">
-                <div class="card">
-                    <h4>🦴 HTML5 骨架</h4>
-                    <p>每個網頁都應以 <code>&lt;!DOCTYPE html&gt;</code> 開頭，觸發瀏覽器標準模式，避免進入 Quirks Mode 導致佈局崩潰。</p>
-                    <span class="tag">wiki/01-html/html-skeleton-and-encoding.md</span>
-                </div>
-                <div class="card">
-                    <h4>🔤 UTF-8 編碼</h4>
-                    <p>永遠在 <code>&lt;head&gt;</code> 第一行設定 <code>&lt;meta charset="UTF-8"&gt;</code>，防止中文顯示為亂碼 (Mojibake)。</p>
-                    <span class="tag">wiki/01-html/html-skeleton-and-encoding.md</span>
-                </div>
-                <div class="card">
-                    <h4>🏷️ 語義化標籤</h4>
-                    <p>擺脫 Div Soup，使用 <code>&lt;header&gt;</code>、<code>&lt;nav&gt;</code>、<code>&lt;main&gt;</code>、<code>&lt;footer&gt;</code> 等標籤，提升 SEO 與無障礙支援。</p>
-                    <span class="tag">wiki/01-html/html-semantics-and-a11y.md</span>
-                </div>
-                <div class="card">
-                    <h4>♿ 無障礙 (A11y)</h4>
-                    <p>所有圖片加上有意義的 <code>alt</code>，輸入框綁定 <code>&lt;label&gt;</code>，讓螢幕閱讀器與 Google 爬蟲都能正確理解內容。</p>
-                    <span class="tag">wiki/01-html/html-semantics-and-a11y.md</span>
-                </div>
+        <!-- M3 Top App Bar -->
+        <header class="top-app-bar">
+            <div class="app-bar-brand">
+                <div class="brand-mark">M3</div>
+                <div class="nav-title">Frontend Ultimate Mastery</div>
             </div>
 
-            <div class="compare-grid">
-                <div class="compare-col compare-bad">
-                    <h4>❌ 錯誤做法</h4>
-                    <ul>
-                        <li>缺少 <code>&lt;!DOCTYPE html&gt;</code></li>
-                        <li>中文頁面沒設定 lang</li>
-                        <li>所有區塊都用 <code>&lt;div&gt;</code></li>
-                        <li>圖片沒有 alt 屬性</li>
-                    </ul>
-                </div>
-                <div class="compare-col compare-good">
-                    <h4>✅ 正確做法</h4>
-                    <ul>
-                        <li>第一行寫 <code>&lt;!DOCTYPE html&gt;</code></li>
-                        <li>設定 <code>lang="zh-Hant"</code></li>
-                        <li>使用語義化標籤</li>
-                        <li>所有 img 加上 alt 描述</li>
-                    </ul>
-                </div>
+            <div class="progress-track" aria-hidden="true">
+                <div class="progress-indicator" id="progressBar"></div>
             </div>
 
-            <div class="code-wrapper">
-                <div class="code-header">HTML5 語義化範例 · wiki/01-html/html-semantics-and-a11y.md</div>
-                <div class="code-body">
+            <div class="app-bar-actions">
+                <span class="viewport-badge" id="viewportBadge" title="動態視口高度識別">dvh: --</span>
+                <button class="md-icon-btn" id="themeToggle" type="button" aria-label="切換深淺色主題">
+                    <span id="themeIcon">☀️</span>
+                    <span id="themeText">淺色</span>
+                </button>
+                <div class="slide-counter" aria-live="polite">
+                    <span class="current" id="currentNum">1</span> / <span id="totalNum">6</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 動態高度主舞台 -->
+        <main class="stage">
+            <!-- 第 1 頁：封面 -->
+            <section class="slide active cover" id="slide-1">
+                <div class="slide-inner">
+                    <div class="cover-chip">Material Design 3 · 前端工程終極精通</div>
+                    <h1>從零理解<span>現代 Web 開發核心</span></h1>
+                    <p class="cover-desc">
+                        一份專為前端初學者設計的教學簡報。從 HTML 語義化、CSS Box Model / Flexbox 到 JavaScript 非同步與 Event Loop，循序漸進掌握現代前端工程師必備的核心觀念。
+                    </p>
+                    <div class="cover-stats">
+                        <div class="stat-card">
+                            <div class="stat-value">6 頁</div>
+                            <div class="stat-label">教學投影片</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">3 模組</div>
+                            <div class="stat-label">HTML / CSS / JS</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">18 篇</div>
+                            <div class="stat-label">Wiki 知識卡片來源</div>
+                        </div>
+                    </div>
+                    <div class="cover-hint">👉 使用鍵盤 ← →、觸控滑動，或下方按鈕切換投影片</div>
+                    <div class="source-bar">
+                        <span>📚 知識來源：frontend-wiki/ 知識庫（所有卡片皆來自 wiki/ 資料夾）</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第 2 頁：第一單元 HTML -->
+            <section class="slide" id="slide-2">
+                <div class="slide-inner">
+                    <div class="unit-chip">單元 1 · HTML</div>
+                    <h2>HTML 骨架與語義化無障礙</h2>
+                    <p class="lead-text">建立網頁的「地基」。理解 HTML5 基礎結構、編碼設定與語義化標籤，避免亂碼、Quirks Mode 與 Div Soup。</p>
+
+                    <div class="cards-grid">
+                        <article class="md-card">
+                            <h4>🦴 HTML5 骨架</h4>
+                            <p>每個網頁都應以 <code>&lt;!DOCTYPE html&gt;</code> 開頭，觸發瀏覽器標準模式，避免進入 Quirks Mode 導致佈局崩潰。</p>
+                            <span class="source-chip">wiki/01-html/html-skeleton-and-encoding.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>🔤 UTF-8 編碼</h4>
+                            <p>永遠在 <code>&lt;head&gt;</code> 第一行設定 <code>&lt;meta charset="UTF-8"&gt;</code>，防止中文顯示為亂碼 (Mojibake)。</p>
+                            <span class="source-chip">wiki/01-html/html-skeleton-and-encoding.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>🏷️ 語義化標籤</h4>
+                            <p>擺脫 Div Soup，使用 <code>&lt;header&gt;</code>、<code>&lt;nav&gt;</code>、<code>&lt;main&gt;</code>、<code>&lt;footer&gt;</code> 等標籤，提升 SEO 與無障礙支援。</p>
+                            <span class="source-chip">wiki/01-html/html-semantics-and-a11y.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>♿ 無障礙 (A11y)</h4>
+                            <p>所有圖片加上有意義的 <code>alt</code>，輸入框綁定 <code>&lt;label&gt;</code>，讓螢幕閱讀器與 Google 爬蟲都能正確理解內容。</p>
+                            <span class="source-chip">wiki/01-html/html-semantics-and-a11y.md</span>
+                        </article>
+                    </div>
+
+                    <div class="compare-grid">
+                        <div class="compare-card compare-bad">
+                            <h4>❌ 錯誤做法</h4>
+                            <ul>
+                                <li>缺少 <code>&lt;!DOCTYPE html&gt;</code></li>
+                                <li>中文頁面沒設定 lang</li>
+                                <li>所有區塊都用 <code>&lt;div&gt;</code></li>
+                                <li>圖片沒有 alt 屬性</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card compare-good">
+                            <h4>✅ 正確做法</h4>
+                            <ul>
+                                <li>第一行寫 <code>&lt;!DOCTYPE html&gt;</code></li>
+                                <li>設定 <code>lang="zh-Hant"</code></li>
+                                <li>使用語義化標籤（header / main / footer）</li>
+                                <li>所有 img 加上 alt 描述</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span>HTML5 語義化範例 · wiki/01-html/html-semantics-and-a11y.md</span>
+                            <button class="copy-btn" type="button">複製</button>
+                        </div>
+                        <div class="code-body">
 <pre><span class="code-tag">&lt;!DOCTYPE html&gt;</span>
-<span class="code-tag">&lt;html lang=</span><span class="code-str">"zh-Hant"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-str">"zh-Hant"</span><span class="code-tag">&gt;</span>
 <span class="code-tag">&lt;head&gt;</span>
-    <span class="code-tag">&lt;meta charset=</span><span class="code-str">"UTF-8"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-str">"UTF-8"</span><span class="code-tag">&gt;</span>
 <span class="code-tag">&lt;/head&gt;</span>
 <span class="code-tag">&lt;body&gt;</span>
-  <span class="code-tag">&lt;header&gt;</span>
-    <span class="code-tag">&lt;nav&gt;</span>...</span><span class="code-tag">&lt;/nav&gt;</span>
-  <span class="code-tag">&lt;/header&gt;</span>
-  <span class="code-tag">&lt;main&gt;</span>
-    <span class="code-tag">&lt;article&gt;</span>...</span><span class="code-tag">&lt;/article&gt;</span>
-  <span class="code-tag">&lt;/main&gt;</span>
-  <span class="code-tag">&lt;footer&gt;</span>...</span><span class="code-tag">&lt;/footer&gt;</span>
+    <span class="code-tag">&lt;header&gt;&lt;nav&gt;</span>...<span class="code-tag">&lt;/nav&gt;&lt;/header&gt;</span>
+    <span class="code-tag">&lt;main&gt;&lt;article&gt;</span>...<span class="code-tag">&lt;/article&gt;&lt;/main&gt;</span>
+    <span class="code-tag">&lt;footer&gt;</span>...<span class="code-tag">&lt;/footer&gt;</span>
 <span class="code-tag">&lt;/body&gt;</span>
 <span class="code-tag">&lt;/html&gt;</span></pre>
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <div class="source-bar">
-                <span class="source-icon">📚</span> 知識來源：wiki/01-html/html-skeleton-and-encoding.md、wiki/01-html/html-semantics-and-a11y.md
-            </div>
-        </section>
+                    <div class="source-bar">
+                        <span>📚 知識來源：wiki/01-html/html-skeleton-and-encoding.md、wiki/01-html/html-semantics-and-a11y.md</span>
+                    </div>
+                </div>
+            </section>
 
-        <!-- 第 3 頁：第二單元 CSS -->
-        <section class="slide" id="slide-3">
-            <div class="unit-badge">單元 2 · CSS</div>
-            <h2>CSS 佈局與現代避坑指南</h2>
-            <p>掌握盒模型、選擇器特異度、Flexbox 與 Grid，學習如何避免佈局爆掉、z-index 沒效與手機端 100vh 陷阱。</p>
+            <!-- 第 3 頁：第二單元 CSS -->
+            <section class="slide" id="slide-3">
+                <div class="slide-inner">
+                    <div class="unit-chip">單元 2 · CSS</div>
+                    <h2>CSS 佈局與現代避坑指南</h2>
+                    <p class="lead-text">掌握盒模型、選擇器特異度、Flexbox 與 Grid，學習如何避免佈局爆掉、z-index 沒效與手機端 100vh 陷阱。</p>
 
-            <div class="cards-grid">
-                <div class="card">
-                    <h4>📦 Box Model</h4>
-                    <p>盒子由內到外分為 Content、Padding、Border、Margin 四層。務必設定 <code>* { box-sizing: border-box; }</code> 讓寬度計算更直覺。</p>
-                    <span class="tag">wiki/02-css/css-box-model-and-units.md</span>
-                </div>
-                <div class="card">
-                    <h4>🎯 選擇器特異度</h4>
-                    <p>標籤選擇器 1 分、類選擇器 10 分、ID 選擇器 100 分。權重最高的樣式會贏，避免亂用 <code>!important</code>。</p>
-                    <span class="tag">wiki/02-css/css-selectors-and-specificity.md</span>
-                </div>
-                <div class="card">
-                    <h4>🌀 Flexbox</h4>
-                    <p>用 <code>display: flex</code> 搭配 <code>justify-content</code> 與 <code>align-items</code> 實現完美對齊，<code>gap</code> 統一管理子元素間距。</p>
-                    <span class="tag">wiki/02-css/css-flexbox-layout.md</span>
-                </div>
-                <div class="card">
-                    <h4>📐 CSS Grid</h4>
-                    <p>二維佈局的指揮官。用 <code>repeat(auto-fill, minmax(250px, 1fr))</code> 實現無需 Media Query 的自適應作品集牆。</p>
-                    <span class="tag">wiki/02-css/css-grid-layout.md</span>
-                </div>
-            </div>
+                    <div class="cards-grid">
+                        <article class="md-card">
+                            <h4>📦 Box Model</h4>
+                            <p>盒子由內到外分為 Content、Padding、Border、Margin 四層。務必設定 <code>* { box-sizing: border-box; }</code> 讓寬度計算更直覺。</p>
+                            <span class="source-chip">wiki/02-css/css-box-model-and-units.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>🎯 選擇器特異度</h4>
+                            <p>標籤選擇器 1 分、類選擇器 10 分、ID 選擇器 100 分。權重最高的樣式會贏，避免亂用 <code>!important</code>。</p>
+                            <span class="source-chip">wiki/02-css/css-selectors-and-specificity.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>🌀 Flexbox</h4>
+                            <p>用 <code>display: flex</code> 搭配 <code>justify-content</code> 與 <code>align-items</code> 實現完美對齊，<code>gap</code> 統一管理子元素間距。</p>
+                            <span class="source-chip">wiki/02-css/css-flexbox-layout.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>📐 CSS Grid</h4>
+                            <p>二維佈局的指揮官。用 <code>repeat(auto-fill, minmax(250px, 1fr))</code> 實現無需 Media Query 的自適應作品集牆。</p>
+                            <span class="source-chip">wiki/02-css/css-grid-layout.md</span>
+                        </article>
+                    </div>
 
-            <div class="compare-grid">
-                <div class="compare-col compare-bad">
-                    <h4>❌ 常見陷阱</h4>
-                    <ul>
-                        <li>手機端用 100vh → 地址欄遮擋</li>
-                        <li>全站字體只用 px → 無法縮放</li>
-                        <li>z-index 沒效 → 缺 position 設定</li>
-                        <li>佈局寬度固定 1200px → 出現滾動條</li>
-                    </ul>
-                </div>
-                <div class="compare-col compare-good">
-                    <h4>✅ 專業做法</h4>
-                    <ul>
-                        <li>改用 100dvh 動態視口高度</li>
-                        <li>基礎字體用 rem 支援 A11y</li>
-                        <li>確認元素有 position 設定</li>
-                        <li>用 width: 90% + max-width 流體寬度</li>
-                    </ul>
-                </div>
-            </div>
+                    <div class="compare-grid">
+                        <div class="compare-card compare-bad">
+                            <h4>❌ 常見陷阱</h4>
+                            <ul>
+                                <li>手機端用 <code>100vh</code> → 地址欄遮擋</li>
+                                <li>全站字體只用 <code>px</code> → 無法縮放</li>
+                                <li><code>z-index</code> 沒效 → 缺 position 設定</li>
+                                <li>佈局寬度固定 1200px → 出現橫向滾動條</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card compare-good">
+                            <h4>✅ 專業做法</h4>
+                            <ul>
+                                <li>改用 <code>100dvh</code> 動態視口高度</li>
+                                <li>基礎字體用 <code>rem</code> 支援 A11y</li>
+                                <li>確認元素有 <code>position</code> 與層疊上下文</li>
+                                <li>用 <code>width: min(90%, 1200px)</code> 流體寬度</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div class="code-wrapper">
-                <div class="code-header">Flexbox 居中配方 · wiki/02-css/css-flexbox-layout.md</div>
-                <div class="code-body">
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span>Flexbox 動態視口居中配方 · wiki/02-css/css-flexbox-layout.md</span>
+                            <button class="copy-btn" type="button">複製</button>
+                        </div>
+                        <div class="code-body">
 <pre><span class="code-keyword">.center-box</span> <span class="code-punct">{</span>
-    <span class="code-keyword">display</span>: <span class="code-func">flex</span>;
-    <span class="code-keyword">justify-content</span>: <span class="code-keyword">center</span>;
-    <span class="code-keyword">align-items</span>: <span class="code-keyword">center</span>;
-    <span class="code-keyword">height</span>: <span class="code-str">100dvh</span>;
+    <span class="code-attr">display</span>: <span class="code-func">flex</span>;
+    <span class="code-attr">justify-content</span>: <span class="code-keyword">center</span>;
+    <span class="code-attr">align-items</span>: <span class="code-keyword">center</span>;
+    <span class="code-attr">height</span>: <span class="code-str">100dvh</span>; <span class="code-comment">/* 動態高度識別，避開手機網址列遮擋 */</span>
 <span class="code-punct">}</span></pre>
+                        </div>
+                    </div>
+
+                    <div class="source-bar">
+                        <span>📚 知識來源：wiki/02-css/css-box-model-and-units.md、css-selectors-and-specificity.md、css-flexbox-layout.md、moc-frontend-pitfalls.md</span>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="source-bar">
-                <span class="source-icon">📚</span> 知識來源：wiki/02-css/css-box-model-and-units.md、wiki/02-css/css-selectors-and-specificity.md、wiki/02-css/css-flexbox-layout.md、wiki/00-mocs/moc-frontend-pitfalls.md
-            </div>
-        </section>
+            <!-- 第 4 頁：第三單元 JavaScript -->
+            <section class="slide" id="slide-4">
+                <div class="slide-inner">
+                    <div class="unit-chip">單元 3 · JavaScript</div>
+                    <h2>JavaScript 核心與 Event Loop 運作機制</h2>
+                    <p class="lead-text">從變數、函數、DOM 操作到非同步與事件循環，理解 JS 如何在單執行緒下處理異步操作而不卡死瀏覽器。</p>
 
-        <!-- 第 4 頁：第三單元 JavaScript -->
-        <section class="slide" id="slide-4">
-            <div class="unit-badge">單元 3 · JavaScript</div>
-            <h2>JavaScript 核心與 Event Loop 運作機制</h2>
-            <p>從變數、函數、DOM 操作到非同步與事件循環，理解 JS 如何在單執行緒下處理異步操作而不卡死瀏覽器。</p>
+                    <div class="cards-grid">
+                        <article class="md-card">
+                            <h4>📦 變數與型別</h4>
+                            <p>優先使用 <code>const</code>，只有會改變的數據才用 <code>let</code>。掌握 String、Number、Boolean 與 Null/Undefined。</p>
+                            <span class="source-chip">wiki/04-js/js-basics-and-variables.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>⚡ 函數與閉包</h4>
+                            <p>箭頭函數是現代標準。閉包讓函數能記住創建時的環境，常用於建立私有計數器。</p>
+                            <span class="source-chip">wiki/04-js/js-functions-scope-and-closures.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>🖱️ DOM 操作</h4>
+                            <p>用 <code>querySelector</code> 選中元素、<code>addEventListener</code> 監聽事件、<code>classList.toggle</code> 實作深色模式。</p>
+                            <span class="source-chip">wiki/04-js/js-dom-manipulation.md</span>
+                        </article>
+                        <article class="md-card">
+                            <h4>🔄 陣列高階函數</h4>
+                            <p><code>.filter()</code> 篩選、<code>.map()</code> 轉換、<code>.forEach()</code> 執行動作，取代冗長的 for 迴圈。</p>
+                            <span class="source-chip">wiki/04-js/js-arrays-objects-and-hof.md</span>
+                        </article>
+                    </div>
 
-            <div class="cards-grid">
-                <div class="card">
-                    <h4>📦 變數與型別</h4>
-                    <p>優先使用 <code>const</code>，只有會改變的數據才用 <code>let</code>。掌握 String、Number、Boolean 與 Null/Undefined。</p>
-                    <span class="tag">wiki/04-js/js-basics-and-variables.md</span>
-                </div>
-                <div class="card">
-                    <h4>⚡ 函數與閉包</h4>
-                    <p>箭頭函數是現代標準。閉包讓函數能記住創建時的環境，常用於建立私有計數器。</p>
-                    <span class="tag">wiki/04-js/js-functions-scope-and-closures.md</span>
-                </div>
-                <div class="card">
-                    <h4>🖱️ DOM 操作</h4>
-                    <p>用 <code>querySelector</code> 選中元素、<code>addEventListener</code> 監聽事件、<code>classList.toggle</code> 實作深色模式。</p>
-                    <span class="tag">wiki/04-js/js-dom-manipulation.md</span>
-                </div>
-                <div class="card">
-                    <h4>🔄 陣列高階函數</h4>
-                    <p><code>.filter()</code> 篩選、<code>.map()</code> 轉換、<code>.forEach()</code> 執行動作，取代冗長的 for 迴圈。</p>
-                    <span class="tag">wiki/04-js/js-arrays-objects-and-hof.md</span>
-                </div>
-            </div>
+                    <h3>🌀 Event Loop：微任務 vs 宏任務</h3>
+                    <p class="lead-text">JS 是單執行緒。Event Loop 不斷檢查 Call Stack，若為空則從 Task Queue 拿取任務。<strong>微任務 (Promise) 優先於宏任務 (setTimeout)</strong>。</p>
 
-            <h3>🌀 Event Loop：微任務 vs 宏任務</h3>
-            <p>JS 是單執行緒。Event Loop 不斷檢查 Call Stack，若為空則從 Task Queue 拿取任務。<strong>微任務 (Promise) 優先於 宏任務 (setTimeout)</strong>。</p>
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span>Event Loop 執行順序驗證 · wiki/04-js/js-engine-and-event-loop.md</span>
+                            <button class="copy-btn" type="button">複製</button>
+                        </div>
+                        <div class="code-body">
+<pre><span class="code-func">console.log</span>(<span class="code-str">"1. 開始"</span>);
 
-            <div class="code-wrapper">
-                <div class="code-header">Event Loop 執行順序驗證 · wiki/04-js/js-engine-and-event-loop.md</div>
-                <div class="code-body">
-<pre><span class="code-keyword">console.log</span>(<span class="code-str">"1. 開始"</span>);
+<span class="code-func">setTimeout</span>(() =&gt; <span class="code-func">console.log</span>(<span class="code-str">"2. setTimeout (宏任務)"</span>), <span class="code-num">0</span>);
 
-<span class="code-keyword">setTimeout</span>(<span class="code-funct">()</span> =&gt; <span class="code-keyword">console.log</span>(<span class="code-str">"2. setTimeout (宏任務)"</span>), <span class="code-num">0</span>);
+<span class="code-keyword">Promise</span>.<span class="code-func">resolve</span>().<span class="code-func">then</span>(() =&gt; <span class="code-func">console.log</span>(<span class="code-str">"3. Promise (微任務)"</span>));
 
-<span class="code-keyword">Promise.resolve</span>().<span class="code-keyword">then</span>(<span class="code-funct">()</span> =&gt; <span class="code-keyword">console.log</span>(<span class="code-str">"3. Promise (微任務)"</span>));
-
-<span class="code-keyword">console.log</span>(<span class="code-str">"4. 結束"</span>);
+<span class="code-func">console.log</span>(<span class="code-str">"4. 結束"</span>);
 
 <span class="code-comment">// 輸出結果：1 → 4 → 3 → 2</span></pre>
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <div class="compare-grid">
-                <div class="compare-col compare-bad">
-                    <h4>❌ 錯誤做法</h4>
-                    <ul>
-                        <li>主執行緒做大量計算 → 瀏覽器卡死</li>
-                        <li>以為 setTimeout(0) 立即執行</li>
-                        <li>fetch 失敗沒有 try/catch 處理</li>
-                        <li>數據加載中頁面空白</li>
+                    <div class="compare-grid">
+                        <div class="compare-card compare-bad">
+                            <h4>❌ 錯誤做法</h4>
+                            <ul>
+                                <li>主執行緒做大量計算 → 瀏覽器卡死</li>
+                                <li>以為 setTimeout(0) 立即執行</li>
+                                <li>fetch 失敗沒有 try/catch 處理</li>
+                                <li>數據加載中頁面空白</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card compare-good">
+                            <h4>✅ 正確做法</h4>
+                            <ul>
+                                <li>用 <code>setTimeout(..., 0)</code> 拆分繁重任務</li>
+                                <li>理解微任務優先於宏任務</li>
+                                <li>用 <code>try/catch</code> 捕捉錯誤，顯示友善訊息</li>
+                                <li>顯示「加載中...」Loading 狀態</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="source-bar">
+                        <span>📚 知識來源：wiki/04-js/js-basics-and-variables.md、js-functions-scope-and-closures.md、js-dom-manipulation.md、js-async-and-promises.md、js-engine-and-event-loop.md</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第 5 頁：第四單元 實戰藍圖 -->
+            <section class="slide" id="slide-5">
+                <div class="slide-inner">
+                    <div class="unit-chip">單元 4 · 實戰藍圖</div>
+                    <h2>個人品牌網站實戰藍圖與驗收</h2>
+                    <p class="lead-text">將 18 篇 Wiki 卡片的觀念彙整為一個完整的個人品牌網站，從 HTML 骨架到異步數據載入，循序完成核心階段與自我檢核。</p>
+
+                    <div class="table-surface">
+                        <table class="stage-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 24%;">階段</th>
+                                    <th style="width: 44%;">核心任務</th>
+                                    <th style="width: 32%;">驗收標準</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="stage-badge">01</span>HTML 骨架</td>
+                                    <td>建立 index.html，設定 UTF-8 與 <code>lang="zh-Hant"</code></td>
+                                    <td>中文無亂碼，語言標籤正確</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="stage-badge">05</span>語義化重構</td>
+                                    <td>將 div 替換為 <code>&lt;header&gt;</code>、<code>&lt;main&gt;</code>、<code>&lt;footer&gt;</code></td>
+                                    <td>每頁僅一個 <code>&lt;h1&gt;</code>，通過無障礙檢查</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="stage-badge">07</span>Flexbox 佈局</td>
+                                    <td>導航欄 <code>space-between</code>，Hero 絕對居中</td>
+                                    <td>導航欄兩端對齊，Hero 在螢幕正中央</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="stage-badge">14</span>陣列篩選</td>
+                                    <td>建立 projects 陣列，實作分類按鈕與 <code>.map()</code> 渲染</td>
+                                    <td>點擊分類正確篩選，作品由 JS 動態生成</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="stage-badge">15</span>異步載入</td>
+                                    <td><code>async/await</code> 抓取 API 數據，含 Loading 與錯誤處理</td>
+                                    <td>載入時顯示 Loading，失敗顯示錯誤訊息</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="stage-badge">16</span>效能優化</td>
+                                    <td>非緊急 <code>&lt;script&gt;</code> 加上 <code>defer</code>，拆分繁重計算</td>
+                                    <td>HTML 先渲染，頁面無卡死</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <ul class="checklist">
+                        <li><label><input type="checkbox"> HTML 通過驗證，無語法錯誤</label></li>
+                        <li><label><input type="checkbox"> CSS Specificity 合理，未濫用 !important</label></li>
+                        <li><label><input type="checkbox"> JS 無全域變數污染，使用 const/let</label></li>
+                        <li><label><input type="checkbox"> 所有圖片皆有有意義的 alt 屬性 (A11y)</label></li>
+                        <li><label><input type="checkbox"> 行動裝置檢視正常，無橫向捲軸 (RWD)</label></li>
+                        <li><label><input type="checkbox"> 深色模式切換正常運作 (DOM 操作)</label></li>
+                        <li><label><input type="checkbox"> API 載入顯示 Loading，失敗有錯誤訊息</label></li>
+                        <li><label><input type="checkbox"> 首次渲染無白屏，&lt;script&gt; 加上 defer</label></li>
                     </ul>
+
+                    <div class="source-bar">
+                        <span>📚 知識來源：wiki/projects/project-blueprint.md（彙整自 18 篇 Wiki 卡片）</span>
+                    </div>
                 </div>
-                <div class="compare-col compare-good">
-                    <h4>✅ 正確做法</h4>
-                    <ul>
-                        <li>用 setTimeout(...,0) 或 Web Workers 拆分任務</li>
-                        <li>理解微任務優先於宏任務</li>
-                        <li>用 try/catch 捕捉錯誤，顯示友善訊息</li>
-                        <li>顯示「加載中...」Loading 狀態</li>
-                    </ul>
+            </section>
+
+            <!-- 第 6 頁：總結 -->
+            <section class="slide summary" id="slide-6">
+                <div class="slide-inner">
+                    <div class="unit-chip">總結</div>
+                    <h2>學習地圖回顧與下一步</h2>
+                    <p class="lead-text">恭喜！你已經走過前端工程的核心觀念。以下是完整的學習路徑與建議的後續方向。</p>
+
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <h4>🦴 HTML 已掌握</h4>
+                            <ul>
+                                <li>HTML5 骨架與 UTF-8 編碼</li>
+                                <li>語義化標籤與無障礙 (A11y)</li>
+                                <li>表單、多媒體與表格</li>
+                            </ul>
+                        </div>
+                        <div class="summary-card">
+                            <h4>🎨 CSS 已掌握</h4>
+                            <ul>
+                                <li>選擇器特異度與 Box Model</li>
+                                <li>Flexbox 與 Grid 二維佈局</li>
+                                <li>響應式設計與 Mobile-First</li>
+                            </ul>
+                        </div>
+                        <div class="summary-card">
+                            <h4>⚡ JavaScript 已掌握</h4>
+                            <ul>
+                                <li>變數、函數與閉包</li>
+                                <li>DOM 操作與事件監聽</li>
+                                <li>異步 Promise 與 Event Loop</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="compare-grid">
+                        <div class="compare-card compare-good">
+                            <h4>🎯 下一步建議</h4>
+                            <ul>
+                                <li>實作個人品牌網站（參照 project-blueprint.md）</li>
+                                <li>學習 TypeScript 與現代框架 (React / Vue / Svelte)</li>
+                                <li>探索 Build Tools (Vite, Webpack) 與 CI/CD</li>
+                                <li>深入效能優化 (Core Web Vitals)</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card compare-bad">
+                            <h4>⚠️ 繼續避坑</h4>
+                            <ul>
+                                <li>不要亂用 <code>!important</code> 掩蓋特異度問題</li>
+                                <li>避免主執行緒阻塞導致頁面卡死</li>
+                                <li>手機端務必使用 <code>100dvh</code> 而非 <code>100vh</code></li>
+                                <li>所有互動介面都要支援鍵盤導航 (A11y)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="source-bar">
+                        <span>📚 所有內容皆來自 frontend-wiki/ 知識庫，詳見 wiki/ 資料夾與 log.md 編譯日誌</span>
+                    </div>
                 </div>
+            </section>
+        </main>
+
+        <!-- M3 Bottom Control Bar -->
+        <footer class="bottom-bar">
+            <div class="footer-meta">Frontend Ultimate Mastery · 知識來源：frontend-wiki/</div>
+
+            <div class="slide-dots" id="slideDots" aria-label="投影片快速跳轉"></div>
+
+            <div class="nav-controls">
+                <button class="md-tonal-btn" id="prevBtn" type="button" aria-label="上一頁">← 上一頁</button>
+                <button class="md-filled-btn" id="nextBtn" type="button" aria-label="下一頁">下一頁 →</button>
             </div>
-
-            <div class="source-bar">
-                <span class="source-icon">📚</span> 知識來源：wiki/04-js/js-basics-and-variables.md、wiki/04-js/js-functions-scope-and-closures.md、wiki/04-js/js-dom-manipulation.md、wiki/04-js/js-async-and-promises.md、wiki/04-js/js-engine-and-event-loop.md
-            </div>
-        </section>
-
-        <!-- 第 5 頁：第四單元 實戰藍圖 -->
-        <section class="slide" id="slide-5">
-            <div class="unit-badge">單元 4 · 實戰</div>
-            <h2>個人品牌網站實戰藍圖與驗收</h2>
-            <p>將 18 篇 Wiki 卡片的觀念彙整為一個完整的個人品牌網站，從 HTML 骨架到異步數據載入，共 16 個實作階段。</p>
-
-            <div class="stage-table">
-                <thead>
-                    <tr>
-                        <th style="width: 22%;">階段</th>
-                        <th style="width: 48%;">核心任務</th>
-                        <th style="width: 30%;">驗收標準</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="stage-badge">1</span> HTML 骨架</td>
-                        <td>建立 index.html，設定 UTF-8 與 lang="zh-Hant"</td>
-                        <td>中文無亂碼，語言標籤正確</td>
-                    </tr>
-                    <tr>
-                        <td><span class="stage-badge">5</span> 語義化重構</td>
-                        <td>將 &lt;div&gt; 替換為 &lt;header&gt;、&lt;main&gt;、&lt;footer&gt; 等</td>
-                        <td>只有一個 &lt;h1&gt;，通過無障礙檢查</td>
-                    </tr>
-                    <tr>
-                        <td><span class="stage-badge">7</span> Flexbox 佈局</td>
-                        <td>導航欄 justify-content: space-between，Hero 絕對居中</td>
-                        <td>導航欄兩端對齊，Hero 在螢幕正中央</td>
-                    </tr>
-                    <tr>
-                        <td><span class="stage-badge">14</span> 陣列篩選</td>
-                        <td>建立 projects 陣列，實作分類按鈕與 .map() 動態渲染</td>
-                        <td>點擊分類正確篩選，作品由 JS 動態生成</td>
-                    </tr>
-                    <tr>
-                        <td><span class="stage-badge">15</span> 異步載入</td>
-                        <td>async/await 抓取 API 數據，顯示 Loading 與錯誤處理</td>
-                        <td>載入時顯示 Loading，失敗顯示錯誤訊息</td>
-                    </tr>
-                    <tr>
-                        <td><span class="stage-badge">16</span> 效能優化</td>
-                        <td>非緊急 &lt;script&gt; 加上 defer，拆分繁重計算</td>
-                        <td>HTML 先渲染，頁面無卡死</td>
-                    </tr>
-                </tbody>
-            </div>
-
-            <div class="checklist">
-                <li>HTML 通過 W3C 驗證，無語法錯誤</li>
-                <li>CSS Specificity 合理，未濫用 !important</li>
-                <li>JS 無全域變數污染，使用 const/let 而非 var</li>
-                <li>所有圖片皆有有意義的 alt 屬性 (A11y)</li>
-                <li>行動裝置檢視正常，無橫向捲軸 (RWD)</li>
-                <li>深色模式切換正常運作 (DOM 操作)</li>
-                <li>API 載入顯示 Loading，失敗有錯誤訊息</li>
-                <li>頁面首次渲染無白屏，&lt;script&gt; 加上 defer</li>
-            </div>
-
-            <div class="source-bar">
-                <span class="source-icon">📚</span> 知識來源：wiki/projects/project-blueprint.md（彙整自 18 篇 Wiki 卡片）
-            </div>
-        </section>
-
-        <!-- 第 6 頁：總結 -->
-        <section class="slide summary" id="slide-6">
-            <div class="unit-badge">總結</div>
-            <h2>學習地圖回顧與下一步</h2>
-            <p>恭喜！你已經走過前端工程的核心觀念。以下是完整的學習路徑與建議的後續方向。</p>
-
-            <div class="summary-grid">
-                <div class="summary-col">
-                    <h4>🦴 HTML 已掌握</h4>
-                    <ul>
-                        <li>HTML5 骨架與 UTF-8 編碼</li>
-                        <li>語義化標籤與無障礙 (A11y)</li>
-                        <li>表單、多媒體與表格</li>
-                    </ul>
-                </div>
-                <div class="summary-col">
-                    <h4>🎨 CSS 已掌握</h4>
-                    <ul>
-                        <li>選擇器特異度與 Box Model</li>
-                        <li>Flexbox 與 Grid 二維佈局</li>
-                        <li>響應式設計與 Mobile-First</li>
-                    </ul>
-                </div>
-                <div class="summary-col">
-                    <h4>⚡ JavaScript 已掌握</h4>
-                    <ul>
-                        <li>變數、函數與閉包</li>
-                        <li>DOM 操作與事件監聽</li>
-                        <li>異步 Promise 與 Event Loop</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="compare-grid" style="margin-top: 2rem;">
-                <div class="compare-col compare-good">
-                    <h4>🎯 下一步建議</h4>
-                    <ul>
-                        <li>實作個人品牌網站（參照 project-blueprint.md）</li>
-                        <li>學習 TypeScript 與現代框架 (React/Vue/Svelte)</li>
-                        <li>探索 Build Tools (Vite, Webpack) 與 CI/CD</li>
-                        <li>深入效能優化 (Core Web Vitals)</li>
-                    </ul>
-                </div>
-                <div class="compare-col compare-bad">
-                    <h4>⚠️ 繼續避坑</h4>
-                    <ul>
-                        <li>不要亂用 !important 掩蓋特異度問題</li>
-                        <li>避免主執行緒阻塞導致頁面卡死</li>
-                        <li>手機端務必使用 100dvh 而非 100vh</li>
-                        <li>所有互動介面都要支援鍵盤導航 (A11y)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="source-bar">
-                <span class="source-icon">📚</span> 所有內容皆來自 frontend-wiki/ 知識庫，詳見 wiki/ 資料夾與 log.md 編譯日誌
-            </div>
-        </section>
-    </div>
-
-    <div class="footer">
-        <span>Frontend Ultimate Mastery · 單頁教學簡報</span>
-        <span style="margin:0 1rem; color:var(--border);">|</span>
-        <span>知识来源：frontend-wiki/</span>
-        <span style="margin:0 1rem; color:var(--border);">|</span>
-        <span>← → 切換投影片</span>
+        </footer>
     </div>
 
     <script>
         (function() {
-            const totalSlides = 6;
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            const totalSlides = slides.length;
             let current = 1;
 
-            const slides = document.querySelectorAll('.slide');
             const progressBar = document.getElementById('progressBar');
             const currentNum = document.getElementById('currentNum');
             const totalNum = document.getElementById('totalNum');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('slideDots');
+            const viewportBadge = document.getElementById('viewportBadge');
 
             totalNum.textContent = totalSlides;
 
+            // ========== 1. 動態高度識別 (VisualViewport + dvh 實時同步) ==========
+            function syncDynamicViewport() {
+                const vh = window.visualViewport
+                    ? Math.round(window.visualViewport.height)
+                    : window.innerHeight;
+                const vw = window.visualViewport
+                    ? Math.round(window.visualViewport.width)
+                    : window.innerWidth;
+
+                document.documentElement.style.setProperty('--app-height', `${vh}px`);
+                viewportBadge.textContent = `${vw}×${vh}px`;
+            }
+
+            syncDynamicViewport();
+            window.addEventListener('resize', syncDynamicViewport);
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', syncDynamicViewport);
+                window.visualViewport.addEventListener('scroll', syncDynamicViewport);
+            }
+
+            // ========== 2. 生成 M3 頁面指示圓點 ==========
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'dot-btn';
+                dot.setAttribute('aria-label', `前往第 ${idx + 1} 頁`);
+                dot.addEventListener('click', () => goToSlide(idx + 1));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = Array.from(dotsContainer.querySelectorAll('.dot-btn'));
+
+            // ========== 3. 投影片切換控制 ==========
             function updateSlide() {
-                // 更新投影片顯示
                 slides.forEach((slide, index) => {
                     const slideNum = index + 1;
                     if (slideNum === current) {
                         slide.classList.remove('prev');
                         slide.classList.add('active');
+                        slide.scrollTop = 0; // 切換後重置該頁捲動位置
                     } else if (slideNum < current) {
                         slide.classList.remove('active');
                         slide.classList.add('prev');
@@ -991,12 +1328,23 @@
                     }
                 });
 
-                // 更新進度條
-                const progress = ((current - 1) / (totalSlides - 1)) * 100;
-                progressBar.style.width = progress + '%';
+                dots.forEach((dot, index) => {
+                    dot.setAttribute('aria-current', String(index + 1 === current));
+                });
 
-                // 更新頁碼
+                const progress = ((current - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
                 currentNum.textContent = current;
+
+                prevBtn.disabled = current === 1;
+                nextBtn.disabled = current === totalSlides;
+            }
+
+            function goToSlide(num) {
+                if (num >= 1 && num <= totalSlides) {
+                    current = num;
+                    updateSlide();
+                }
             }
 
             function nextSlide() {
@@ -1013,8 +1361,12 @@
                 }
             }
 
-            // 鍵盤事件
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            // 鍵盤導覽
             document.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
                 if (e.key === 'ArrowRight' || e.key === ' ') {
                     e.preventDefault();
                     nextSlide();
@@ -1022,32 +1374,64 @@
                     e.preventDefault();
                     prevSlide();
                 } else if (e.key === 'Home') {
-                    current = 1;
-                    updateSlide();
+                    e.preventDefault();
+                    goToSlide(1);
                 } else if (e.key === 'End') {
-                    current = totalSlides;
-                    updateSlide();
+                    e.preventDefault();
+                    goToSlide(totalSlides);
                 }
             });
 
-            // 觸摸滑動支援（簡易版）
+            // 觸控滑動支援
             let touchStartX = 0;
-            let touchEndX = 0;
+            let touchStartY = 0;
 
             document.addEventListener('touchstart', (e) => {
                 touchStartX = e.changedTouches[0].screenX;
-            }, {passive: true});
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
 
             document.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) nextSlide();
+                const diffX = touchStartX - e.changedTouches[0].screenX;
+                const diffY = touchStartY - e.changedTouches[0].screenY;
+                // 僅在明顯水平滑動時切換，避免干擾垂直閱讀捲動
+                if (Math.abs(diffX) > 55 && Math.abs(diffX) > Math.abs(diffY) * 1.4) {
+                    if (diffX > 0) nextSlide();
                     else prevSlide();
                 }
-            }, {passive: true});
+            }, { passive: true });
 
-            // 初始化
+            // ========== 4. M3 深淺色主題切換 ==========
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            themeToggle.addEventListener('click', () => {
+                const root = document.documentElement;
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+                themeIcon.textContent = isDark ? '🌙' : '☀️';
+                themeText.textContent = isDark ? '深色' : '淺色';
+            });
+
+            // ========== 5. 程式碼一鍵複製 ==========
+            document.querySelectorAll('.code-wrapper').forEach((wrapper) => {
+                const btn = wrapper.querySelector('.copy-btn');
+                const pre = wrapper.querySelector('pre');
+                if (!btn || !pre) return;
+
+                btn.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(pre.innerText);
+                        btn.textContent = '已複製 ✓';
+                        setTimeout(() => { btn.textContent = '複製'; }, 1600);
+                    } catch {
+                        btn.textContent = '複製失敗';
+                        setTimeout(() => { btn.textContent = '複製'; }, 1600);
+                    }
+                });
+            });
+
             updateSlide();
         })();
     </script>
