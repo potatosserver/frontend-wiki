@@ -3,7 +3,7 @@ id: 01-03
 module: html
 title: 表單與輸入
 status: published
-tags: [#HTML, #表單, #輸入, #驗證, #A11y]
+tags: ["#HTML", "#表單", "#輸入", "#驗證", "#A11y""]
 summary: HTML 表單結構、輸入元件類型、label 綁定與 HTML5 原生驗證屬性。
 source: raw/03-forms-and-inputs.md
 last_updated: 2026-11-24

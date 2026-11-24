@@ -3,7 +3,7 @@ id: 04-04
 module: js
 title: DOM 操作
 status: published
-tags: [#JS, #DOM, #querySelector, #addEventListener, #DarkMode, #createElement]
+tags: ["#JS", "#DOM", "#querySelector", "#addEventListener", "#DarkMode", "#createElement""]
 summary: DOM 選中元素、修改內容與樣式、監聽事件、動態創建元素，含主題切換實作範例。
 source: raw/04-dom-manipulation-mastery.md
 last_updated: 2026-11-24

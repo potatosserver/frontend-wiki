@@ -3,7 +3,7 @@ id: 02-05
 module: css
 title: CSS Grid 佈局
 status: published
-tags: [#CSS, #Grid, #網格, #二維佈局, #auto-fill, #minmax]
+tags: ["#CSS", "#Grid", "#網格", "#二維佈局", "#auto-fill", "#minmax""]
 summary: CSS Grid 顯示方式、grid-template-columns、1fr 分數單位、auto-fill/minmax 自適應列數，適合二維佈局。
 source: raw/05-grid-practical.md
 last_updated: 2026-11-24

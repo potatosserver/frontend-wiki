@@ -3,7 +3,7 @@ id: 01-02
 module: html
 title: 文字與基礎標籤
 status: published
-tags: [#HTML, #標題, #段落, #超連結, #列表, #SEO]
+tags: ["#HTML", "#標題", "#段落", "#超連結", "#列表", "#SEO""]
 summary: HTML 標題層級、段落格式化、超連結與列表標籤的正確使用方式與語義意義。
 source: raw/02-text-and-basic-tags.md
 last_updated: 2026-11-24

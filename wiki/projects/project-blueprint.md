@@ -3,7 +3,7 @@ id: proj-01
 module: projects
 title: 個人品牌網站實戰藍圖
 status: published
-tags: [#Project, #Blueprint, #HTML, #CSS, #JS]
+tags: ["#Project", "#Blueprint", "#HTML", "#CSS", "#JS""]
 summary: 18 篇疊加任務的驗收清單與實作路線圖，彙整所有主專案功能步驟。
 last_updated: 2026-11-24
 related:

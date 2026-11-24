@@ -3,7 +3,7 @@ id: 04-01
 module: js
 title: 基礎與變數
 status: published
-tags: [#JS, #變數, #let, #const, #資料型別, #JavaScript]
+tags: ["#JS", "#變數", "#let", "#const", "#資料型別", "#JavaScript""]
 summary: JavaScript 變數宣告 (let/const)、資料型別 (String/Number/Boolean/null/undefined) 與實驗場使用方式。
 source: raw/01-basics-and-variables.md
 last_updated: 2026-11-24

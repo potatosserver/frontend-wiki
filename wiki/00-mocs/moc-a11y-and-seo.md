@@ -3,7 +3,7 @@ id: moc-01
 module: cross
 title: A11y 無障礙與 SEO 實務
 status: published
-tags: [#MOC, #A11y, #SEO, #無障礙, #語義化]
+tags: ["#MOC", "#A11y", "#SEO", "#無障礙", "#語義化""]
 summary: 跨 HTML/CSS/JS 的無障礙設計與搜尋引擎優化實務，含語義化標籤、alt 文字與 label 綁定。
 last_updated: 2026-11-24
 ---

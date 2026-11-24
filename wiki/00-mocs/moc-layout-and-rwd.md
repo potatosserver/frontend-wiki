@@ -3,7 +3,7 @@ id: moc-04
 module: cross
 title: 版面佈局與響應式設計
 status: published
-tags: [#MOC, #Layout, #RWD, #Flexbox, #Grid, #響應式]
+tags: ["#MOC", "#Layout", "#RWD", "#Flexbox", "#Grid", "#響應式""]
 summary: 跨 CSS 的版面佈局與響應式設計，含 Flexbox、Grid、Media Query、Mobile-First 與自適應列數。
 last_updated: 2026-11-24
 ---
